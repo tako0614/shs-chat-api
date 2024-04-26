@@ -4,24 +4,45 @@
         <script src="https://cdn.tailwindcss.com"></script>
         <script>
             let ws;
-            const connect = () => {
-                ws = new WebSocket("ws://localhost:8000/api/app?password=takotako");
-                ws.onmessage = (event) => {
-                console.log(event.data);
-                }
+            ws = new WebSocket("ws://localhost:8000/api/app?password=takotako");
+            ws.onmessage = (event) => {
+            console.log(event.data);
+            }
+            function send() {
+            ws.send("Hello, Server!");
             }
         </script>
     </head>
-    <body>
-        <div class="flex h-screen w-full">
-            <div class="m-auto">
-                <button
-                class=""
-                onclick="connect()"
-                >
-                tako
-                </button>
+    <body class="flex h-screen w-full">
+        <header class="fixed w-full">
+            <nav class="h-16 bg-gray-500 text-white">
+                <div class="flex w-11/12 m-auto h-full">
+                    <div class="text-3xl w-1/5 h-full mt-2">
+                        <a class="m-auto" href="/">簡易掲示板</a>
+                    </div>
+                    <nav class="ml-auto flex">
+                        <ul class="flex">
+                            <li class="pl-10 m-auto"><a href="/home">Home</a></li>
+                            <li class="pl-10 m-auto"><a href="/about">About</a></li>
+                            <li class="pl-10 m-auto"><a href="/contact">Contact</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </nav>
+        </header>
+        <div class="pt-16 h-screen w-full">
+        <!-- メッセージ表示エリア -->
+        <div class="h-5/6 w-full overflow-y-scroll">
+            <div class="bg-gray-400">
+
             </div>
+        </div>
+        <!-- 送信フォームとボタン　下に固定-->
+        <div class="fixed bottom-0 w-full bg-gray-500 h-16">
+        <div class="flex">
+            <input type="text" class="w-11/12 h-12 m-2 rounded-lg" id="message">
+            <button class="w-1/12 h-12 m-2" onclick="send()">送信</button>
+        </div>
         </div>
     </body>
 </html>

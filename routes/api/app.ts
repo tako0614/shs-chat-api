@@ -14,10 +14,14 @@ export const handler = {
       const { socket, response } = Deno.upgradeWebSocket(req);
       if (!socket) throw new Error("unreachable");
       socket.onmessage = (ev) => {
-        socket.send(ev.data);
+        const test = {
+          type: "message",
+          data: ev.data,
+        };
+        socket.send(JSON.stringify(test));
       };
       socket.onopen = () => {
-        socket.send("Hello from the client!");
+        socket.send("connected");
       };
       return response;
     } else {

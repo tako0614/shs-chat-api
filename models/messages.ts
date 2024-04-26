@@ -1,6 +1,4 @@
 import mongoose from "mongoose";
-import rooms from "./rooms.ts";
-
 export const messagesSchema = new mongoose.Schema({
   message: {
     type: String,
