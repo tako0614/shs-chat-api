@@ -5,7 +5,6 @@ import { FreshContext } from "$fresh/server.ts";
 export const handler = {
   GET(req: Request, _ctx: FreshContext) {
     if (req.headers.get("upgrade") === "websocket") {
-      console.log(req);
       const url = new URL(req.url);
       const reqpassword = url.searchParams.get("password");
       if (reqpassword !== password) {
@@ -14,11 +13,18 @@ export const handler = {
       const { socket, response } = Deno.upgradeWebSocket(req);
       if (!socket) throw new Error("unreachable");
       socket.onmessage = (ev) => {
+
+
+        const req = JSON.parse(ev.data);
+        console.log(req.data);
         const test = {
           type: "message",
           data: ev.data,
         };
         socket.send(JSON.stringify(test));
+
+
+
       };
       socket.onopen = () => {
         socket.send("connected");
