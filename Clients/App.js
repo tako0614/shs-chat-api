@@ -2,7 +2,7 @@ let userName = "匿名さん"
 const ws = new WebSocket("ws://localhost:8000/api/app?password=takotako");
 
 ws.onmessage = (event) => {
-
+    console.log(event.data);
 }
 ws.onopen = () => {
     //console.log("接続完了");
@@ -15,8 +15,9 @@ const send = () => {
     if (messageElement.value === "") {
         return;
     }
-    ws.send(JSON.stringify({type: "message", data: messageElement.value, name: userName}));
+    ws.send(JSON.stringify({type: "send", message: messageElement.value, user: userName, password: "takotako"}));
     messageElement.value = "";
+    console.log("送信完了");
 }
 
 const ChangeName = () => {

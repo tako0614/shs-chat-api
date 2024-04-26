@@ -2,6 +2,8 @@ import { load } from "https://deno.land/std@0.204.0/dotenv/mod.ts";
 const env = await load();
 const password = env["PASSWORD"];
 import { FreshContext } from "$fresh/server.ts";
+import messages from "../../models/messages.ts";
+let clients: any = [];
 export const handler = {
   GET(req: Request, _ctx: FreshContext) {
     if (req.headers.get("upgrade") === "websocket") {
@@ -12,21 +14,37 @@ export const handler = {
       }
       const { socket, response } = Deno.upgradeWebSocket(req);
       if (!socket) throw new Error("unreachable");
-      socket.onmessage = (ev) => {
+      socket.onmessage = async (ev) => {
 
 
         const req = JSON.parse(ev.data);
-        console.log(req.data);
-        const test = {
-          type: "message",
-          data: ev.data,
-        };
-        socket.send(JSON.stringify(test));
-
-
-
+        if(req.password !== password){
+          return;
+        }
+        console.log(req);
+        if(req.message === undefined, req.user === undefined){
+          return;
+        }
+          const result = await messages.create({
+            message: req.message,
+            user: req.user,
+          });
+          //接続されているクライアント全員にメッセージを送信
+          const test = {
+            message: req.message,
+            user: req.user,
+            timestamp: result.timestamp,
+          };
+          clients.forEach((client: WebSocket) => {
+            console.log(client.readyState);
+            if (client.readyState === WebSocket.OPEN) {
+              client.send(JSON.stringify(test));
+            }
+          });
+          //socket.send(JSON.stringify(test));
       };
-      socket.onopen = () => {
+      socket.onopen = (ws) => {
+        clients.push(ws.target);
         socket.send("connected");
       };
       return response;
