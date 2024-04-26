@@ -14,9 +14,9 @@
                     </div>
                     <nav class="ml-auto flex">
                         <ul class="flex">
-                            <li class="pl-10 m-auto"><a href="/clients/client.html">現在の表示名: 匿名さん</a></li>
-                            <li class="pl-10 m-auto flex"><input type="text" class="rounded-xl text-black" value="匿名さん" id="name"></li>
-                            <li class="pl-10 m-auto"><button class="text-white h-10 bg-blue-700 hover:bg-blue-800 focus:ring-4 p-2.5 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">変更</button></li>
+                            <li class="pl-10 m-auto"><a id="name">現在の表示名: 匿名さん</a></li>
+                            <li class="pl-10 m-auto flex"><input type="text" class="rounded-xl text-black" value="匿名さん" id="inputname"></li>
+                            <li class="pl-10 m-auto"><button onclick="ChangeName()" class="text-white h-10 bg-blue-700 hover:bg-blue-800 focus:ring-4 p-2.5 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">変更</button></li>
                         </ul>
                     </nav>
                 </div>
@@ -25,10 +25,15 @@
         <div class="pt-16 h-screen w-full">
             <div class="h-full w-full overflow-y-scroll bg-gray-400">
                 <div class="m-2" id="chat">
-                    <div class="bg-white p-2 rounded-lg">
-                        <div class="text-sm">2021/01/01 12:00:00</div>
-                        <div class="text-lg">Hello, World!</div>
+                    <!--
+                    <div class="bg-white p-2 rounded-lg flex">
+                        <div>
+                            <div class="text-sm">2021/01/01 12:00:00</div>
+                            <div class="text-lg">Hello, World!</div>
+                        </div>
+                        <div class="text-xl ml-auto pt-2">匿名さん</div>
                     </div>
+                    -->
                 </div>
             </div>
             <div class="fixed bottom-0 w-full bg-gray-500 h-1/12">
