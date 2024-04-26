@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>WebSocket Client</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            let ws;
+            const connect = () => {
+                ws = new WebSocket("ws://localhost:8000/api/app?password=takotako");
+                ws.onmessage = (event) => {
+                console.log(event.data);
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div class="flex h-screen w-full">
+            <div class="m-auto">
+                <button
+                class=""
+                onclick="connect()"
+                >
+                tako
+                </button>
+            </div>
+        </div>
+    </body>
+</html>
