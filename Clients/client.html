@@ -2,17 +2,8 @@
     <head>
         <title>WebSocket Client</title>
         <script src="https://cdn.tailwindcss.com"></script>
-        <script>
-            let ws;
-            ws = new WebSocket("ws://localhost:8000/api/app?password=takotako");
-            ws.onmessage = (event) => {
-            console.log(event.data);
-            }
-            function send() {
-            
-            ws.send("Hello, Server!");
-            }
-        </script>
+        <script src="./App.js"></script>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body class="flex h-screen w-full">
         <header class="fixed w-full">
