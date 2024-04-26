@@ -36,7 +36,6 @@ export const handler = {
             timestamp: result.timestamp,
           };
           clients.forEach((client: WebSocket) => {
-            console.log(client.readyState);
             if (client.readyState === WebSocket.OPEN) {
               client.send(JSON.stringify(test));
             }
