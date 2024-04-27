@@ -9,13 +9,11 @@ export const handler = {
         }
         const howMany = url.searchParams.get("howMany") || "";
         const when = url.searchParams.get("when") || "";
-        // whenよりも古いメッセージ10件を取得
+        console.log(new Date(when));
         if(when === "" || howMany === ""){
-            console.log(Date.now());
             return new Response("Bad Request", { status: 400 });
         }
-        const result = await messages.find({ timestamp: { $lt: when } }).sort({ timestamp: -1 }).limit(Number(howMany));
-        console.log(result);
+        const result = await messages.find({ timestamp: { $lt: new Date(when) } }).sort({ timestamp: -1 }).limit(Number(howMany));
         return new Response(JSON.stringify(JSON.stringify(result)), {
             headers: { "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*"
