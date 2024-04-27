@@ -5,7 +5,7 @@
         <script src="./App.js"></script>
         <link rel="stylesheet" href="style.css">
     </head>
-    <body class="flex h-screen w-full">
+    <body class="flex h-screen w-full bg-gray-400">
         <header class="fixed w-full">
             <nav class="h-16 bg-gray-500 text-white">
                 <div class="flex w-11/12 m-auto h-full">
@@ -22,8 +22,8 @@
                 </div>
             </nav>
         </header>
-        <div class="pt-16 h-screen w-full">
-            <div class="h-full w-full overflow-y-scroll bg-gray-400">
+        <div class="pt-16 h-screen w-full pb-16" id="test">
+            <div class="h-full w-full ">
                 <div class="m-2" id="chat">
                     <!--
                     <div class="bg-white p-2 rounded-lg flex">
@@ -37,12 +37,10 @@
                 </div>
             </div>
             <div class="fixed bottom-0 w-full bg-gray-500 h-1/12">
-              <div class="flex">
+              <form class="flex m-auto" onsubmit="send();return false">
                   <input type="text" class="w-11/12 h-12 m-2 rounded-lg" id="message" />
-                  <button class="w-1/12 h-12 m-2"
-                  onclick="send()"
-                  >送信</button>
-              </div>
+                  <input type="submit" value="送信" class="w-1/12 h-12 m-2">
+              </form>
             </div>
           </div>
     </body>
