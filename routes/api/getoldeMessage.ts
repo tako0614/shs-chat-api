@@ -9,7 +9,6 @@ export const handler = {
     }
     const howMany = url.searchParams.get("howMany") || "";
     const when = url.searchParams.get("when") || "";
-    console.log(when);
     if (when === "" || howMany === "") {
       return new Response("Bad Request", { status: 400 });
     }

@@ -2,5 +2,104 @@
 <html lang="ja">
     <head>
         <title>使用されている技術</title>
+        <script src="https://cdn.tailwindcss.com"></script>
     </head>
+    <body>
+        <h1 class="text-4xl m-5 text-center">使用されている技術</h1>
+        <div class="flex w-11/12 m-auto">
+            <div class="w-1/2 h-screen">
+                <div class="m-10">
+                        <div class="m-10">
+                            <h2 class="text-2xl">WebSocket</h2>
+                            <p>WebSocketは、WebブラウザとWebサーバー間で双方向通信を行うための技術です。</p>
+                            <p>この技術を使用することで、リアルタイムでの情報のやり取りが可能になります。</p>
+                            <!--WebSocketのurl-->
+                            <a href="https://developer.mozilla.org/ja/docs/Web/API/WebSocket" class="text-blue-500">WebSocket</a>
+                        </div>
+                        <div class="m-10">
+                            <h2 class="text-2xl">Node.js</h2>
+                            <p>Node.jsは、JavaScriptのランタイム環境です。</p>
+                            <p>このランタイム環境を使用することで、JavaScriptをサーバーサイドで実行することができます。</p>
+                            <p>今回はtailwind cssをコンパイルするのに使いました</p>
+                        </div>
+                        <div class="m-10">
+                            <h2 class="text-2xl">Tailwind CSS</h2>
+                            <p>Tailwind CSSは、CSSフレームワークの一つです。</p>
+                            <p>このフレームワークを使用することで、webページのデザインするファイル(css)を書かなくても</p>
+                            <p>htmlファイルだけでデザインすることができます</p>
+                            <!--tailwindのurl-->
+                            <a href="https://tailwindcss.com/" class="text-blue-500">Tailwind CSS</a>
+                        </div>
+                                    <!--Deno-->
+                        <div class="m-10">
+                            <h2 class="text-2xl">Deno</h2>
+                            <p>Denoは、JavaScript/TypeScriptのランタイム環境です。</p>
+                            <p>Node.jsのようなJavaScript/TypeScriptのランタイム環境で、TypeScriptやJSXをそのまま動かせることや</p>
+                            <p>urlでインポートできたり、ESmoduleのみをサポートしていることが特徴です</p>
+                            <p></p>
+                            <!--denoのurl-->
+                            <a href="https://deno.land/" class="text-blue-500">Deno</a>
+                        </div>
+                        <!--Fresh-->
+                        <div class="m-10">
+                            <h2 class="text-2xl">Fresh</h2>
+                            <p>Freshは、Denoのフレームワークの一つです。</p>
+                            <p>このフレームワークを使用することで、簡単にWebアプリケーションを作成することができます。</p>
+                            <p>今回はapiとデータベースの通信やメッセージの処理に使用しましたがwebページのレンダリングなど様々な</p>
+                            <p>用途に使用することができます。</p>
+                            <!--freshのurl-->
+                            <a href="https://fresh.deno.dev/" class="text-blue-500">Fresh</a>
+                    </div>
+                </div>
+            </div>
+            <div class="w-1/2">
+                <div class="m-10">
+                        <div class="m-10">
+                            <h2 class="text-2xl">JavaScript</h2>
+                            <p>JavaScriptは、Webページを動的にするためのプログラミング言語です。</p>
+                            <p>この言語を使用することで、Webページの動的な操作やアニメーションを行うことができます。</p>
+                            <p>またapiと通信することによって新しいデータを取得することもできます</p>
+                            <!--JavaScriptのurl-->
+                            <a href="https://developer.mozilla.org/ja/docs/Web/JavaScript" class="text-blue-500">JavaScript</a>
+                        </div>
+                        <div class="m-10">
+                            <h2 class="text-2xl">TypeScript</h2>
+                            <p>TypeScriptは、JavaScriptのスーパーセットであり、JavaScriptに型を追加したプログラミング言語です。</p>
+                            <p>この言語を使用することで、JavaScriptのコードをより安全に書くことができます。</p>
+                            <p>また、JavaScriptのコードをそのままTypeScriptのコードに変換することもできます</p>
+                            <!--TypeScriptのurl-->
+                            <a href="https://www.typescriptlang.org/" class="text-blue-500">TypeScript</a>
+                        </div>
+                        <div class="m-10">
+                            <h2 class="text-2xl"></h2>
+                            <p>Tailwind CSSは、CSSフレームワークの一つです。</p>
+                            <p>このフレームワークを使用することで、webページのデザインするファイル(css)を書かなくても</p>
+                            <p>htmlファイルだけでデザインすることができます</p>
+                            <!--tailwindのurl-->
+                            <a href="https://tailwindcss.com/" class="text-blue-500">Tailwind CSS</a>
+                        </div>
+                                    <!--Deno-->
+                        <div class="m-10">
+                            <h2 class="text-2xl">mongoDB | mongoose</h2>
+                            <p>mongoDBは、NoSQLデータベースの一つです。</p>
+                            <p>JSON形式のデータを保存することができ</p>
+                            <p>比較的高速でMySQLよりも柔軟なのが特徴です</p>
+                            <p>また、mongooseは、mongoDBを操作するためのライブラリです。</p>
+                            <!--mongoDBのurl-->
+                            <a href="https://www.mongodb.com/" class="text-blue-500">mongoDB</a>
+                            <!--mongooseのurl-->
+                            <a href="https://mongoosejs.com/" class="text-blue-500">mongoose</a>
+                        </div>
+                        <div class="m-10">
+                            <h2 class="text-2xl">html</h2>
+                            <p>htmlは、Webページの構造を定義するためのマークアップ言語です。</p>
+                            <p>この言語を使用することで、Webページの構造を定義することができます。</p>
+                            <p>また、CSSやJavaScriptと組み合わせることで、Webページをデザインすることができます</p>
+                            <!--htmlのurl-->
+                            <a href="https://developer.mozilla.org/ja/docs/Web/HTML" class="text-blue-500">html</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
