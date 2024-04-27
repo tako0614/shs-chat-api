@@ -15,32 +15,30 @@ export const handler = {
       const { socket, response } = Deno.upgradeWebSocket(req);
       if (!socket) throw new Error("unreachable");
       socket.onmessage = async (ev) => {
-
-
         const req = JSON.parse(ev.data);
-        if(req.password !== password){
+        if (req.password !== password) {
           return;
         }
         console.log(req);
-        if(req.message === undefined, req.user === undefined){
+        if (req.message === undefined, req.user === undefined) {
           return;
         }
-          const result = await messages.create({
-            message: req.message,
-            user: req.user,
-          });
-          //接続されているクライアント全員にメッセージを送信
-          const test = {
-            message: req.message,
-            user: req.user,
-            timestamp: result.timestamp,
-          };
-          clients.forEach((client: WebSocket) => {
-            if (client.readyState === WebSocket.OPEN) {
-              client.send(JSON.stringify(test));
-            }
-          });
-          //socket.send(JSON.stringify(test));
+        const result = await messages.create({
+          message: req.message,
+          user: req.user,
+        });
+        //接続されているクライアント全員にメッセージを送信
+        const test = {
+          message: req.message,
+          user: req.user,
+          timestamp: result.timestamp,
+        };
+        clients.forEach((client: WebSocket) => {
+          if (client.readyState === WebSocket.OPEN) {
+            client.send(JSON.stringify(test));
+          }
+        });
+        //socket.send(JSON.stringify(test));
       };
       socket.onopen = (ws) => {
         clients.push(ws.target);

@@ -1,120 +1,131 @@
-let userName = "匿名さん"
+let userName = "匿名さん";
 let ws = new WebSocket("ws://localhost:8000/api/app?password=takotako");
 let mostOldMessageDate = new Date(Date.now());
 // イベントハンドラ
 const onload = async () => {
-const DefaultMessageDataraw = await fetch(`http://localhost:8000/api/getoldeMessage?password=takotako&when=${mostOldMessageDate}&howMany=15`);
-let DefaultMessageData = await DefaultMessageDataraw.json();
-if (typeof DefaultMessageData === 'string') {
+  const DefaultMessageDataraw = await fetch(
+    `http://localhost:8000/api/getoldeMessage?password=takotako&when=${mostOldMessageDate}&howMany=15`,
+  );
+  let DefaultMessageData = await DefaultMessageDataraw.json();
+  if (typeof DefaultMessageData === "string") {
     DefaultMessageData = JSON.parse(DefaultMessageData);
-}
-//配列繰り返し処理
-if (Array.isArray(DefaultMessageData)) {
+  }
+  //配列繰り返し処理
+  if (Array.isArray(DefaultMessageData)) {
     DefaultMessageData.forEach((obj) => {
-        createMessageElement(obj, true);
+      createMessageElement(obj, true);
     });
     //一番古いメッセージをmostOldMessageDateに代入
     DefaultMessageData.forEach((obj) => {
-        obj.timestamp = new Date(obj.timestamp);
-        if(mostOldMessageDate > obj.timestamp){
-            mostOldMessageDate = obj.timestamp;
-        }
+      obj.timestamp = new Date(obj.timestamp);
+      if (mostOldMessageDate > obj.timestamp) {
+        mostOldMessageDate = obj.timestamp;
+      }
     });
-} else {
-    console.error('Data is not an array:', DefaultMessageData);
-}
-}
+  } else {
+    console.error("Data is not an array:", DefaultMessageData);
+  }
+};
 ws.onclose = () => {
-    alert("接続が切れました。リロードしてください。");
-}
+  alert("接続が切れました。リロードしてください。");
+};
 ws.onmessage = (event) => {
-    const data = JSON.parse(event.data);
-    createMessageElement(data, false);
-    data.timestamp = new Date(data.timestamp);
-}
+  const data = JSON.parse(event.data);
+  createMessageElement(data, false);
+  data.timestamp = new Date(data.timestamp);
+};
 const formatDate = (date) => {
-    const formatted = date
-  .toLocaleDateString("ja-JP", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-  })
-  .split("/")
-  .join("-");
-    return formatted;
-}
-function createMessageElement(data,isAppend) {
-    const reqDate = data.timestamp;
-    const User = data.user;
-    const Message = data.message;
-    const parent = document.getElementById('chat');
-    const div = document.createElement('div');
-    div.className = 'bg-white p-2 rounded-lg flex mt-2';
-    const div2 = document.createElement('div');
-    const span1 = document.createElement('div');
-    span1.innerText = formatDate(new Date(reqDate));
-    span1.className = 'text-sm';
-    const span2 = document.createElement('div');
-    span2.innerText = Message;
-    span2.className = 'text-lg';
-    const div3 = document.createElement('div');
-    div3.innerText = User;
-    div3.className = 'text-xl ml-auto pt-2';
-    div2.appendChild(span1);
-    div2.appendChild(span2);
-    div.appendChild(div2);
-    div.appendChild(div3);
-    if(isAppend){
-        parent.appendChild(div);
-    } else {
-        parent.prepend(div);
-    }
+  const formatted = date
+    .toLocaleDateString("ja-JP", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    })
+    .split("/")
+    .join("-");
+  return formatted;
+};
+function createMessageElement(data, isAppend) {
+  const reqDate = data.timestamp;
+  const User = data.user;
+  const Message = data.message;
+  const parent = document.getElementById("chat");
+  const div = document.createElement("div");
+  div.className = "bg-white p-2 rounded-lg flex mt-2";
+  const div2 = document.createElement("div");
+  const span1 = document.createElement("div");
+  span1.innerText = formatDate(new Date(reqDate));
+  span1.className = "text-sm";
+  const span2 = document.createElement("div");
+  span2.innerText = Message;
+  span2.className = "text-lg";
+  const div3 = document.createElement("div");
+  div3.innerText = User;
+  div3.className = "text-xl ml-auto pt-2";
+  div2.appendChild(span1);
+  div2.appendChild(span2);
+  div.appendChild(div2);
+  div.appendChild(div3);
+  if (isAppend) {
+    parent.appendChild(div);
+  } else {
+    parent.prepend(div);
+  }
 }
 ws.onopen = () => {
-    console.log("接続完了");
+  console.log("接続完了");
 };
 const send = () => {
-    const messageElement = document.getElementById("message");
-    if (messageElement.value === "") {
-        return;
-    }
-    ws.send(JSON.stringify({type: "send", message: messageElement.value, user: userName, password: "takotako"}));
-    messageElement.value = "";
-    console.log("送信完了");
-}
+  const messageElement = document.getElementById("message");
+  if (messageElement.value === "") {
+    return;
+  }
+  ws.send(
+    JSON.stringify({
+      type: "send",
+      message: messageElement.value,
+      user: userName,
+      password: "takotako",
+    }),
+  );
+  messageElement.value = "";
+  console.log("送信完了");
+};
 
 const ChangeName = () => {
-    const inputnameElement = document.getElementById("inputname");
-    userName = inputnameElement.value;
-    const nameElement = document.getElementById("name");
-    nameElement.innerText = "現在の表示名: " + userName;
-}
+  const inputnameElement = document.getElementById("inputname");
+  userName = inputnameElement.value;
+  const nameElement = document.getElementById("name");
+  nameElement.innerText = "現在の表示名: " + userName;
+};
 
-window.addEventListener('load', onload());
+window.addEventListener("load", onload());
 
 window.addEventListener("scroll", async (e) => {
-    if (window.scrollY + window.innerHeight === document.body.clientHeight) {
-        const result = await fetch(`http://localhost:8000/api/getoldeMessage?password=takotako&when=${mostOldMessageDate}&howMany=15`);
-        let data = await result.json();
-        data = JSON.parse(data);
-        if (Array.isArray(data)) {
-            data.forEach((obj) => {
-                createMessageElement(obj, true);
-            });
-        } else {
-            console.error('Data is not an array:', data);
-        }
-        //一番古いメッセージをmostOldMessageDateに代入
-        if(data.length > 0){
-            data.forEach((obj) => {
-                obj.timestamp = new Date(obj.timestamp);
-                if(mostOldMessageDate > obj.timestamp){
-                    mostOldMessageDate = obj.timestamp;
-                }
-            });
-        }
+  if (window.scrollY + window.innerHeight === document.body.clientHeight) {
+    const result = await fetch(
+      `http://localhost:8000/api/getoldeMessage?password=takotako&when=${mostOldMessageDate}&howMany=15`,
+    );
+    let data = await result.json();
+    data = JSON.parse(data);
+    if (Array.isArray(data)) {
+      data.forEach((obj) => {
+        createMessageElement(obj, true);
+      });
+    } else {
+      console.error("Data is not an array:", data);
     }
+    //一番古いメッセージをmostOldMessageDateに代入
+    if (data.length > 0) {
+      data.forEach((obj) => {
+        obj.timestamp = new Date(obj.timestamp);
+        if (mostOldMessageDate > obj.timestamp) {
+          mostOldMessageDate = obj.timestamp;
+        }
+      });
+    }
+  }
 });
