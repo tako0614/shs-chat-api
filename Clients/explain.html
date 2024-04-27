@@ -5,81 +5,119 @@
         <link rel="stylesheet" href="output.css">
     </head>
     <body>
-        <h1 class="text-4xl m-5 text-center">使用されている技術</h1>
+        <div class="w-full">
+                    <h1 class="text-4xl m-5 text-center">使用されている技術</h1>
+        <div class="text-center">
+            <button
+                onclick="window.location.href = './client.html';"
+                class="text-white h-10 bg-blue-700 hover:bg-blue-800 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 focus:ring-4 p-2.5 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center"
+            >戻る</button>
+        </div>
+        </div>
         <div class="flex w-11/12 m-auto">
             <div class="w-1/2 h-screen">
                 <div class="m-10">
-                        <div class="m-5 rounded-md bg-gray-300">
-                            <h2 class="text-2xl p-2">WebSocket</h2>
+                        <div class="m-5 rounded-md bg-gray-300 flex">
+                            <div>
+                                <h2 class="text-2xl p-2">WebSocket</h2>
                             <p class="p-2">WebSocketは、WebブラウザとWebサーバー間で双方向通信を行うための技術です。<br>
                             この技術を使用することで、リアルタイムでの情報のやり取りが可能になります。</p>
                             <!--WebSocketのurl-->
                             <a href="https://developer.mozilla.org/ja/docs/Web/API/WebSocket" class="text-blue-500 p-2">WebSocket</a>
+                            </div>
+                            <img src="https://www.dotcom-monitor.com/wp-content/uploads/sites/3/2016/06/WebSockets.png" alt="" class="w-40 ml-auto">
                         </div>
-                        <div class="m-5 rounded-md bg-green-200">
-                            <h2 class="text-2xl p-2">Node.js</h2>
-                            <p class="p-2">Node.jsは、JavaScriptのランタイム環境です。<br>
-                            このランタイム環境を使用することで、JavaScriptをサーバーサイドで実行することができます。<br>
-                            今回はtailwind cssをコンパイルするのに使いました</p>
+                        <div class="m-5 rounded-md bg-green-200 flex">
+                            <div class="">
+                                <h2 class="text-2xl p-2">Node.js</h2>
+                                <p class="p-2">Node.jsは、JavaScriptのランタイム環境です。<br>
+                                    このランタイム環境を使用することで、JavaScriptをサーバーサイドで実行することができます。<br>
+                                    今回はtailwind cssをコンパイルするのに使いました</p>
+                            </div>
+                            <img src="https://d33wubrfki0l68.cloudfront.net/3c18c558cbf9b510cf94a560907643799c699866/0d754/images/nodejs-logo.svg" alt="" class="w-40 ml-auto">
                         </div>
-                        <div class="m-5 rounded-md bg-blue-200">
-                            <h2 class="text-2xl p-2">Tailwind CSS</h2>
-                            <p class="p-2">Tailwind CSSは、CSSフレームワークの一つです。<br>
-                            このフレームワークを使用することで、webページのデザインするファイル(css)を書かなくても<br>
-                            htmlファイルだけでデザインすることができます</p>
+                        <div class="m-5 rounded-md bg-blue-200 flex">
+                            <div>
+                                <h2 class="text-2xl p-2">Tailwind CSS</h2>
+                            <p class="p-2">
+                            Tailwind CSSは、CSSフレームワークの一つです。<br>
+                            htmlファイルの中にクラスを記述することで、簡単にデザインを行うことができます。<br>
+                            また、Bootstrapなどの他のフレームワークと比べて、カスタマイズ性が高いのが特徴です
+                            </p>
                             <!--tailwindのurl-->
                             <a href="https://tailwindcss.com/" class="text-blue-500 p-2">Tailwind CSS</a>
+                            </div>
+                            <img src="https://tailwindcss.com/_next/static/media/tailwindcss-mark.3c5441fc7a190fb1800d4a5c7f07ba4b1345a9c8.svg" alt="" class="w-40 ml-auto">
                         </div>
-                                    <!--Deno-->
-                        <div class="m-5 rounded-md bg-blue-300">
-                            <h2 class="text-2xl p-2">Deno</h2>
+                        <div class="m-5 rounded-md bg-blue-300 flex">
+                            <div>
+                                <h2 class="text-2xl p-2">Deno</h2>
                             <p class="p-2">Denoは、JavaScript/TypeScriptのランタイム環境です。<br>
-                            Node.jsのようなJavaScript/TypeScriptのランタイム環境で、TypeScriptやJSXをそのまま動かせることや<br>
-                            urlでインポートできたり、ESmoduleのみをサポートしていることが特徴です</p>
+                            Node.jsのようなJavaScript/TypeScriptのランタイム環境で、<br>
+                            TypeScriptやJSXをそのまま動かせることや<br>
+                            urlでインポートできたり、ESmoduleのみをサポートしていることが特徴です。<br>
+                            また、ブラウザとの互換性が高く互換性の問題が少ないです。
+                        </p>
                             <!--denoのurl-->
                             <a href="https://deno.land/" class="text-blue-500 p-2">Deno</a>
+                            </div>
+                            <img src="https://raw.githubusercontent.com/denolib/high-res-deno-logo/master/deno_hr_circle.svg" alt="" class="w-40 ml-auto">
                         </div>
                         <!--Fresh-->
-                        <div class="m-5 rounded-md bg-yellow-300">
-                            <h2 class="text-2xl p-2">Fresh</h2>
-                            <p class="p-2">Freshは、Denoのフレームワークの一つです。
-                            このフレームワークを使用することで、簡単にWebアプリケーションを作成することができます。<br>
-                            今回はapiとデータベースの通信やメッセージの処理に使用しましたがwebページのレンダリングなど様々な<br>
-                            用途に使用することができます。</p>
-                            <!--freshのurl-->
-                            <a href="https://fresh.deno.dev/" class="text-blue-500 p-2">Fresh</a>
+                        <div class="m-5 rounded-md bg-yellow-300 flex">
+                            <div>
+                                <h2 class="text-2xl p-2">Fresh</h2>
+                                <p class="p-2">Freshは、Denoのフレームワークの一つです。<br>
+                                このフレームワークを使用することで、簡単にWebアプリを作成することができます。<br>
+                                今回はapiとデータベースの通信やメッセージの処理に使用しましたが<br>
+                                webページのレンダリングなど様々な用途に使用することができます。</p>
+                                <!--freshのurl-->
+                                <a href="https://fresh.deno.dev/" class="text-blue-500 p-2">Fresh</a>
+                            </div>
+                            <img src="https://fresh.deno.dev/illustration/lemon-squash.svg?__frsh_c=de327e7eb6775cca0ced7a040544f03bf01244fc" alt="" class="w-40 h-40 ml-auto">
                     </div>
                 </div>
             </div>
             <div class="w-1/2">
                 <div class="m-10">
-                        <div class="m-5 rounded-md bg-yellow-200">
-                            <h2 class="text-2xl p-2">JavaScript</h2>
-                            <p class="p-2">JavaScriptは、Webページを動的にするためのプログラミング言語です。<br>
-                            この言語を使用することで、Webページの動的な操作やアニメーションを行うことができます。<br>
-                            またapiと通信することによって新しいデータを取得することもできます</p>
-                            <!--JavaScriptのurl-->
-                            <a href="https://developer.mozilla.org/ja/docs/Web/JavaScript" class="text-blue-500 p-2">JavaScript</a>
+                        <div class="m-5 rounded-md bg-yellow-200 flex">
+                            <div>
+                                <h2 class="text-2xl p-2">JavaScript</h2>
+                                <p class="p-2">JavaScriptは、Webページを動的にするためのプログラミング言語です。<br>
+                                この言語を使用することで、Webページの動的な操作やアニメーションを行うことができます。<br>
+                                またapiと通信することによって新しいデータを取得することもできます</p>
+                                <!--JavaScriptのurl-->
+                                <a href="https://developer.mozilla.org/ja/docs/Web/JavaScript" class="text-blue-500 p-2">JavaScript</a>
+                            </div>
+                            <img src="https://cdn.icon-icons.com/icons2/2108/PNG/512/javascript_icon_130900.png" alt="" class="w-40 ml-auto">
                         </div>
-                        <div class="m-5 rounded-md bg-blue-200">
-                            <h2 class="text-2xl p-2">TypeScript</h2>
-                            <p class="p-2">TypeScriptは、JavaScriptのスーパーセットであり、JavaScriptに型を追加したプログラミング言語です。<br>
-                            この言語を使用することで、JavaScriptのコードをより安全に書くことができます。<br>
-                            また、JavaScriptのコードをそのままTypeScriptのコードに変換することもできます</p>
-                            <!--TypeScriptのurl-->
-                            <a href="https://www.typescriptlang.org/" class="text-blue-500 p-2">TypeScript</a>
+                        <div class="m-5 rounded-md bg-blue-200 flex">
+                            <div>
+                                <h2 class="text-2xl p-2">TypeScript</h2>
+                                <p class="p-2">TypeScriptは、JavaScriptのスーパーセットであり、<br>
+                                    JavaScriptに型を追加したプログラミング言語です。<br>
+                                この言語を使用することで、JavaScriptのコードをより安全に書くことができます。<br>
+                                また、JavaScriptのコードをそのままTypeScriptのコードに変換することもできます</p>
+                                <!--TypeScriptのurl-->
+                                <a href="https://www.typescriptlang.org/" class="text-blue-500 p-2">TypeScript</a>
+                            </div>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/2048px-Typescript_logo_2020.svg.png" alt="" class="w-40 ml-auto">
                         </div>
-                        <div class="m-5 rounded-md bg-red-200">
-                            <h2 class="text-2xl p-2">Git</h2>
-                            <p class="p-2">Gitは、分散型バージョン管理システムです。<br>
-                            このシステムを使用することで、複数の開発者が同じプロジェクトを同時に開発することができます。<br>
-                            また、バージョン管理を行うことで、過去のコードに戻すことも可能です</p>
-                            <!--Gitのurl-->
-                            <a href="https://git-scm.com/" class="text-blue-500 p-2">Git</a>
-                            <a href="https://github.com/tako0614/shs-chat-api" class="text-blue-500 p-2">このサイトのGitリポジトリー</a>
+                        <div class="m-5 rounded-md bg-red-200 flex">
+                            <div>
+                                <h2 class="text-2xl p-2">Git</h2>
+                                <p class="p-2">Gitは、分散型バージョン管理システムです。<br>
+                                Gitを使用することで、複数の開発者が同じプロジェクトを同時に開発することができます。<br>
+                                また、バージョン管理を行うことで、過去のコードに戻すことも可能です</p>
+                                <!--Gitのurl-->
+                                <a href="https://git-scm.com/" class="text-blue-500 p-2">Git</a>
+                                <a href="https://github.com/tako0614/shs-chat-api" class="text-blue-500 p-2">このサイトのGitリポジトリー</a>
+                            </div>
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Git_icon.svg/2048px-Git_icon.svg.png" alt="" class="w-40 ml-auto">
                         </div>
-                        <div class="m-5 rounded-md bg-green-200">
-                            <h2 class="text-2xl p-2">mongoDB | mongoose</h2>
+                        <div class="m-5 rounded-md bg-green-200 flex">
+                            <div>
+                                <h2 class="text-2xl p-2">mongoDB | mongoose</h2>
                             <p class="p-2">mongoDBは、NoSQLデータベースの一つです。<br>
                             JSON形式のデータを保存することができ、<br>
                             比較的高速でMySQLよりも柔軟なのが特徴です。<br>
@@ -88,15 +126,21 @@
                             <a href="https://www.mongodb.com/" class="text-blue-500 p-2">mongoDB</a>
                             <!--mongooseのurl-->
                             <a href="https://mongoosejs.com/" class="text-blue-500 p-2">mongoose</a>
+                            </div>
+                            <img src="https://cdn.worldvectorlogo.com/logos/mongodb-icon-2.svg" alt="" class="w-40 ml-auto">
                         </div>
-                        <div class="m-5 rounded-md bg-orange-200">
-                            <h2 class="text-2xl p-2">html</h2>
+                        <div class="m-5 rounded-md bg-orange-200 flex">
+                            <div>
+                                <h2 class="text-2xl p-2">html</h2>
                             <p class="p-2">htmlは、Webページの構造を定義するためのマークアップ言語です。<br>
                             この言語を使用することで、Webページの構造を定義することができます。<br>
                             また、CSSやJavaScriptと組み合わせることで、Webページをデザインすることができます<br>
                             正式名称はHyperText Markup Languageです</p>
                             <!--htmlのurl-->
                             <a href="https://developer.mozilla.org/ja/docs/Web/HTML" class="text-blue-500 p-2">html</a>
+                            </div>
+
+                            <img src="https://static-00.iconduck.com/assets.00/html-5-icon-726x1024-evem6gg5.png" alt="" class="w-40 ml-auto">
                     </div>
                 </div>
             </div>
