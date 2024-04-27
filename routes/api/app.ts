@@ -26,6 +26,7 @@ export const handler = {
         const result = await messages.create({
           message: req.message,
           user: req.user,
+          timestamp: new Date(),
         });
         //接続されているクライアント全員にメッセージを送信
         const test = {

@@ -9,11 +9,13 @@ export const handler = {
     }
     const howMany = url.searchParams.get("howMany") || "";
     const when = url.searchParams.get("when") || "";
-    console.log(new Date(when));
+    console.log(when);
     if (when === "" || howMany === "") {
       return new Response("Bad Request", { status: 400 });
     }
-    const result = await messages.find({ timestamp: { $lt: new Date(when) } })
+    const date = new Date(when);
+    date.setHours(date.getHours() - 9);
+    const result = await messages.find({ timestamp: { $lt: date } })
       .sort({ timestamp: -1 }).limit(Number(howMany));
     return new Response(JSON.stringify(JSON.stringify(result)), {
       headers: {

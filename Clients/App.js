@@ -1,6 +1,6 @@
 let userName = "匿名さん";
 let ws = new WebSocket("ws://localhost:8000/api/app?password=takotako");
-let mostOldMessageDate = new Date(Date.now());
+let mostOldMessageDate = new Date();
 // イベントハンドラ
 const onload = async () => {
   const DefaultMessageDataraw = await fetch(
@@ -16,12 +16,14 @@ const onload = async () => {
       createMessageElement(obj, true);
     });
     //一番古いメッセージをmostOldMessageDateに代入
-    DefaultMessageData.forEach((obj) => {
-      obj.timestamp = new Date(obj.timestamp);
-      if (mostOldMessageDate > obj.timestamp) {
-        mostOldMessageDate = obj.timestamp;
-      }
-    });
+    if (DefaultMessageData.length > 0) {
+      DefaultMessageData.forEach((obj) => {
+        obj.timestamp = new Date(obj.timestamp);
+        if (mostOldMessageDate > obj.timestamp) {
+          mostOldMessageDate = obj.timestamp;
+        }
+      });
+    }
   } else {
     console.error("Data is not an array:", DefaultMessageData);
   }
@@ -103,8 +105,9 @@ const ChangeName = () => {
 };
 
 window.addEventListener("load", onload());
-
+  /*
 window.addEventListener("scroll", async (e) => {
+
   if (window.scrollY + window.innerHeight === document.body.clientHeight) {
     const result = await fetch(
       `http://localhost:8000/api/getoldeMessage?password=takotako&when=${mostOldMessageDate}&howMany=15`,
@@ -128,4 +131,42 @@ window.addEventListener("scroll", async (e) => {
       });
     }
   }
-});
+  const { scrollHeight, scrollTop, clientHeight } = e.target;
+  const isScrollButtom = scrollHeight - clientHeight === scrollTop;
+  console.log(e.target);
+});*/
+window.onscroll = async function() {
+  // ブラウザのビューポートの高さ
+  const windowHeight = window.innerHeight;
+
+  // 全体のページの高さ
+  const documentHeight = document.documentElement.scrollHeight;
+
+  // スクロールされた量
+  const scrolled = window.scrollY;
+
+  // スクロールされた量とビューポートの高さの合計が、全体のページの高さと同じかどうかをチェック
+  if (windowHeight + scrolled >= documentHeight) {
+    const result = await fetch(
+      `http://localhost:8000/api/getoldeMessage?password=takotako&when=${mostOldMessageDate}&howMany=15`,
+    );
+    let data = await result.json();
+    data = JSON.parse(data);
+    if (Array.isArray(data)) {
+      data.forEach((obj) => {
+        createMessageElement(obj, true);
+      });
+    } else {
+      console.error("Data is not an array:", data);
+    }
+    //一番古いメッセージをmostOldMessageDateに代入
+    if (data.length > 0) {
+      data.forEach((obj) => {
+        obj.timestamp = new Date(obj.timestamp);
+        if (mostOldMessageDate > obj.timestamp) {
+          mostOldMessageDate = obj.timestamp;
+        }
+      });
+    }
+  }
+};
