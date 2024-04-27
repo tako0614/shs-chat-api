@@ -1,13 +1,15 @@
 let userName = "匿名さん";
-const password = "takotako";
-const endpoint = "http://localhost:8000/api";
-const webSocketEndpoint = "ws://localhost:8000/api";
-let ws = new WebSocket(`${webSocketEndpoint}/app?password=${password}`);
+const httpplotocoll = "https";
+const wsplotocoll = "wss";
+const host = "chat.takos.jp";
+const password = "";
+let ws = new WebSocket(`${wsplotocoll}://${host}/api/app?password=${password}`);
 let mostOldMessageDate = new Date();
+
 // イベントハンドラ
 const onload = async () => {
   const DefaultMessageDataraw = await fetch(
-    `${endpoint}/getoldeMessage?password=${password}&when=${mostOldMessageDate}&howMany=20`,
+    `${httpplotocoll}://${host}/api/getoldeMessage?password=${password}&when=${mostOldMessageDate}&howMany=15`,
   );
   let DefaultMessageData = await DefaultMessageDataraw.json();
   if (typeof DefaultMessageData === "string") {
@@ -128,9 +130,9 @@ window.onscroll = async function () {
   const scrolled = window.scrollY;
 
   // スクロールされた量とビューポートの高さの合計が、全体のページの高さと同じかどうかをチェック
-  if (windowHeight + scrolled + 10 >= documentHeight) {
+  if (windowHeight + scrolled >= documentHeight) {
     const result = await fetch(
-      `${endpoint}/getoldeMessage?password=${password}&when=${mostOldMessageDate}&howMany=15`,
+      `${httpplotocoll}://${host}/api/getoldeMessage?password=${password}&when=${mostOldMessageDate}&howMany=15`,
     );
     let data = await result.json();
     data = JSON.parse(data);
