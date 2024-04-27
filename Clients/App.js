@@ -77,6 +77,9 @@ function createMessageElement(data, isAppend) {
     parent.prepend(div);
   }
 }
+changePage = (page) => {
+  window.location.href = page;
+};
 ws.onopen = () => {
   console.log("接続完了");
 };
@@ -85,10 +88,15 @@ const send = () => {
   if (messageElement.value === "") {
     return;
   }
+  //XSS対策
+  const message = messageElement.value.replace(/</g, "&lt;").replace(
+    />/g,
+    "&gt;",
+  );
   ws.send(
     JSON.stringify({
       type: "send",
-      message: messageElement.value,
+      message: message,
       user: userName,
       password: "takotako",
     }),
@@ -99,43 +107,14 @@ const send = () => {
 
 const ChangeName = () => {
   const inputnameElement = document.getElementById("inputname");
-  userName = inputnameElement.value;
+  //XSS対策
+  userName = inputnameElement.value.replace(/</g, "&lt;").replace(/>/g, "&gt;");
   const nameElement = document.getElementById("name");
   nameElement.innerText = "現在の表示名: " + userName;
 };
 
 window.addEventListener("load", onload());
-  /*
-window.addEventListener("scroll", async (e) => {
-
-  if (window.scrollY + window.innerHeight === document.body.clientHeight) {
-    const result = await fetch(
-      `http://localhost:8000/api/getoldeMessage?password=takotako&when=${mostOldMessageDate}&howMany=15`,
-    );
-    let data = await result.json();
-    data = JSON.parse(data);
-    if (Array.isArray(data)) {
-      data.forEach((obj) => {
-        createMessageElement(obj, true);
-      });
-    } else {
-      console.error("Data is not an array:", data);
-    }
-    //一番古いメッセージをmostOldMessageDateに代入
-    if (data.length > 0) {
-      data.forEach((obj) => {
-        obj.timestamp = new Date(obj.timestamp);
-        if (mostOldMessageDate > obj.timestamp) {
-          mostOldMessageDate = obj.timestamp;
-        }
-      });
-    }
-  }
-  const { scrollHeight, scrollTop, clientHeight } = e.target;
-  const isScrollButtom = scrollHeight - clientHeight === scrollTop;
-  console.log(e.target);
-});*/
-window.onscroll = async function() {
+window.onscroll = async function () {
   // ブラウザのビューポートの高さ
   const windowHeight = window.innerHeight;
 
