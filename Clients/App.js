@@ -2,7 +2,7 @@ let userName = "匿名さん";
 const httpplotocoll = "https";
 const wsplotocoll = "wss";
 const host = "chat.takos.jp";
-const password = "";
+const password = "takotakotakotako";
 let ws = new WebSocket(`${wsplotocoll}://${host}/api/app?password=${password}`);
 let mostOldMessageDate = new Date();
 
