@@ -1,10 +1,13 @@
 let userName = "匿名さん";
-let ws = new WebSocket("ws://localhost:8000/api/app?password=takotako");
+const password = "takotako";
+const endpoint = "http://localhost:8000/api";
+const webSocketEndpoint = "ws://localhost:8000/api";
+let ws = new WebSocket(`${webSocketEndpoint}/app?password=${password}`);
 let mostOldMessageDate = new Date();
 // イベントハンドラ
 const onload = async () => {
   const DefaultMessageDataraw = await fetch(
-    `http://localhost:8000/api/getoldeMessage?password=takotako&when=${mostOldMessageDate}&howMany=15`,
+    `${endpoint}/getoldeMessage?password=${password}&when=${mostOldMessageDate}&howMany=20`,
   );
   let DefaultMessageData = await DefaultMessageDataraw.json();
   if (typeof DefaultMessageData === "string") {
@@ -98,7 +101,7 @@ const send = () => {
       type: "send",
       message: message,
       user: userName,
-      password: "takotako",
+      password: password,
     }),
   );
   messageElement.value = "";
@@ -125,9 +128,9 @@ window.onscroll = async function () {
   const scrolled = window.scrollY;
 
   // スクロールされた量とビューポートの高さの合計が、全体のページの高さと同じかどうかをチェック
-  if (windowHeight + scrolled >= documentHeight) {
+  if (windowHeight + scrolled + 10 >= documentHeight) {
     const result = await fetch(
-      `http://localhost:8000/api/getoldeMessage?password=takotako&when=${mostOldMessageDate}&howMany=15`,
+      `${endpoint}/getoldeMessage?password=${password}&when=${mostOldMessageDate}&howMany=15`,
     );
     let data = await result.json();
     data = JSON.parse(data);
