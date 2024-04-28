@@ -1,8 +1,9 @@
-let userName = "匿名さん";
-const httpplotocoll = "https";
-const wsplotocoll = "wss";
-const host = "chat.takos.jp";
-const password = "takotakotakotako";
+import { config } from "./config.js";
+let userName = config.defaultUserName;
+const httpplotocoll = config.httpplotocoll;
+const wsplotocoll = config.wsplotocoll;
+const host = config.host;
+const password = config.password;
 let ws = new WebSocket(`${wsplotocoll}://${host}/api/app?password=${password}`);
 let mostOldMessageDate = new Date();
 
