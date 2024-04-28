@@ -14,7 +14,7 @@
 //config
 const config = {
   useDefaultUserName: false,
-  defaultUserName: "",
+  defaultUserName: "匿名",
   httpplotocoll: "https",
   wsplotocoll: "wss",
   host: "chat.takos.jp",
