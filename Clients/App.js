@@ -24,6 +24,11 @@ const config = {
   password: "takotako",
   defaultTheme: "white"
 }
+//アスキーアートオブジェクト
+//JavaScriptの割合増やすためなのは内緒
+const AA = {
+  
+}
 //変数設定
 let userName = config.defaultUserName;
 const httpplotocoll = config.httpplotocoll;
@@ -34,9 +39,6 @@ let mostOldMessageDate = new Date();
 let theme = config.defaultTheme
 //webSocket接続
 const ws = new WebSocket(`${wsplotocoll}://${host}/api/app?password=${password}`);
-
-
-
 
 //読み込まれたときに実行
 const onload = async () => {
@@ -82,8 +84,13 @@ ws.onclose = () => {
 //メッセージ受信時
 ws.onmessage = (event) => {
   const data = JSON.parse(event.data);
-  createMessageElement(data, false);
-  data.timestamp = new Date(data.timestamp);
+  if(data.type == "message") {
+    createMessageElement(data, false);
+    data.timestamp = new Date(data.timestamp);
+  } else if(data.type == "people"){
+    const peopeleNumberElement = document.getElementById("peopeleNumber")
+    peopeleNumberElement.innerText = data.people + "人"
+  }
 };
 
 //Date型を文字列に変換
@@ -263,3 +270,13 @@ window.onscroll = async () => {
     }
   }
 };
+
+//接続されている数取得
+
+setInterval(() => {
+  const test = {
+    type: "people",
+    password: password
+  }
+  ws.send(JSON.stringify(test))
+}, 3000);
