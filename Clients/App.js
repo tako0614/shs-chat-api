@@ -118,6 +118,7 @@ const ChangeColor = () => {
   const ChangeThemaAreaElement = document.getElementById("ChangeThemaArea")
   const AAAreaElement = document.getElementById("AAArea")
   const ConnectPeopleAreaElement = document.getElementById("ConnectPeopleArea")
+  const footerElement = document.getElementById("footer")
   if(theme == "white") {
     bodyElement.className = "flex h-screen w-full bg-gray-950"
     headerElement.className = "h-16 bg-gray-900 text-white"
@@ -127,6 +128,7 @@ const ChangeColor = () => {
     ChangeThemaAreaElement.className = "m-auto w-full bg-slate-800 rounded-lg h-[25%] mb-2 text-white"
     AAAreaElement.className = "m-auto w-full bg-slate-800 rounded-lg h-1/3 mb-2 text-white"
     ConnectPeopleAreaElement.className = "m-auto w-full bg-slate-800 rounded-lg h-[25%] text-white"
+    footerElement.className = "fixed bottom-0 w-full bg-gray-900 h-1/12"
     theme = "dark"
   } else if(theme == "dark") {
     bodyElement.className = "flex h-screen w-full bg-gray-400"
@@ -137,6 +139,7 @@ const ChangeColor = () => {
     ChangeThemaAreaElement.className = "m-auto w-full bg-slate-200 rounded-lg h-[25%] mb-2"
     AAAreaElement.className = "m-auto w-full bg-slate-200 rounded-lg h-1/3 mb-2"
     ConnectPeopleAreaElement.className = "m-auto w-full bg-slate-200 rounded-lg h-[25%]"
+    footerElement.className = "fixed bottom-0 w-full bg-gray-500 h-1/12"
     theme = "white"
   }
 }
