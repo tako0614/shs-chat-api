@@ -39,7 +39,9 @@ const ws = new WebSocket(`${wsplotocoll}://${host}/api/app?password=${password}`
 //読み込まれたときに実行
 const onload = async () => {
   const nameElement = document.getElementById("name")
-  nameElement.innerText = "現在の表示名: " + userName
+  if(userName == "") {
+    nameElement.innerText = "現在の表示名: " + userName
+  }
   const inputnameElement = document.getElementById("inputname")
   inputnameElement.value = userName
   const DefaultMessageDataraw = await fetch(
