@@ -1,5 +1,6 @@
 //config
 const config = {
+  useDefaultUserName: false,
   defaultUserName: "匿名さん",
   httpplotocoll: "https",
   wsplotocoll: "wss",
@@ -106,6 +107,9 @@ const send = () => {
     />/g,
     "&gt;",
   );
+  if(userName == "" || userName == undefined) {
+    alert("名前を設定してください")
+  }
   ws.send(
     JSON.stringify({
       type: "send",
