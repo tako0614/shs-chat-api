@@ -23,7 +23,7 @@ export const handler = {
         if (req.message === undefined, req.user === undefined) {
           return;
         }
-        if(req.user == null) {
+        if(req.user === null || req.user == undefined) {
           return
         }
         const result = await messages.create({
