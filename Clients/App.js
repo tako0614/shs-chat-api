@@ -15,8 +15,6 @@ const host = config.host;
 const password = config.password;
 let ws = new WebSocket(`${wsplotocoll}://${host}/api/app?password=${password}`);
 let mostOldMessageDate = new Date();
-
-// イベントハンドラ
 const onload = async () => {
   const DefaultMessageDataraw = await fetch(
     `${httpplotocoll}://${host}/api/getoldeMessage?password=${password}&when=${mostOldMessageDate}&howMany=15`,
@@ -65,7 +63,7 @@ const formatDate = (date) => {
     .join("-");
   return formatted;
 };
-function createMessageElement(data, isAppend) {
+const createMessageElement = (data, isAppend) => {
   const reqDate = data.timestamp;
   const User = data.user;
   const Message = data.message;
@@ -128,7 +126,7 @@ const ChangeName = () => {
 };
 
 window.addEventListener("load", onload());
-window.onscroll = async function () {
+window.onscroll = async () => {
   // ブラウザのビューポートの高さ
   const windowHeight = window.innerHeight;
 

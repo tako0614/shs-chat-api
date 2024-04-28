@@ -4,6 +4,7 @@
         <title>WebSocket Client</title>
         <script src="./App.js"></script>
         <link rel="stylesheet" href="output.css">
+        <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body class="flex h-screen w-full bg-gray-400">
         <header class="fixed w-full">
@@ -39,9 +40,9 @@
                 </div>
             </div>
             <div class="fixed bottom-0 w-full bg-gray-500 h-1/12">
-              <form class="flex m-auto" onsubmit="send();return false">
-                  <input type="text" class="w-11/12 h-12 m-2 rounded-lg" id="message" />
-                  <input type="submit" value="送信" class="w-1/12 h-12 m-2">
+              <form class="flex m-auto pl-2 w-1/2" onsubmit="send();return false">
+                  <input type="text" class="h-12 m-auto bg-gray-50 border text-lg border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" id="message" placeholder="メッセージを入力" />
+                  <input type="submit" value="送信" class="m-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-10 py-5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
               </form>
             </div>
           </div>
