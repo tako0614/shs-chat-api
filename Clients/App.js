@@ -1,7 +1,7 @@
 //config
 const config = {
   defaultUserName: "匿名さん",
-  httpplotocoll: "https,",
+  httpplotocoll: "https",
   wsplotocoll: "wss",
   host: "chat.takos.jp",
   password: "takotakotakotako"
