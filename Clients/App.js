@@ -1,4 +1,13 @@
-import { config } from "./config.js";
+//config
+const config = {
+  defaultUserName: "匿名さん",
+  httpplotocoll: "https,",
+  wsplotocoll: "wss",
+  host: "chat.takos.jp",
+  password: "takotakotakotako"
+}
+
+
 let userName = config.defaultUserName;
 const httpplotocoll = config.httpplotocoll;
 const wsplotocoll = config.wsplotocoll;
@@ -110,7 +119,6 @@ const send = () => {
   messageElement.value = "";
   console.log("送信完了");
 };
-
 const ChangeName = () => {
   const inputnameElement = document.getElementById("inputname");
   //XSS対策
