@@ -70,7 +70,7 @@ const onload = async () => {
 
 //接続が途切れた場合
 ws.onclose = () => {
-  alert("接続が切れました。OKを押した後10秒後にリロードします");
+  alert("接続が切れました。10秒後にリロードします");
   setTimeout(() => {
     window.location.href = "./client.html";
   }, 10000)
