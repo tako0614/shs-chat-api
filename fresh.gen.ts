@@ -5,7 +5,7 @@
 import * as $_404 from "./routes/_404.tsx";
 import * as $api_app from "./routes/api/app.ts";
 import * as $api_getoldeMessage from "./routes/api/getoldeMessage.ts";
-import * as $Counter from "./islands/Counter.tsx";
+
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -14,9 +14,7 @@ const manifest = {
     "./routes/api/app.ts": $api_app,
     "./routes/api/getoldeMessage.ts": $api_getoldeMessage,
   },
-  islands: {
-    "./islands/Counter.tsx": $Counter,
-  },
+  islands: {},
   baseUrl: import.meta.url,
 } satisfies Manifest;
 

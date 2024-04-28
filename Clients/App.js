@@ -21,7 +21,8 @@ const config = {
   httpplotocoll: "http",
   wsplotocoll: "ws",
   host: "localhost:8000",
-  password: "takotako"
+  password: "takotako",
+  defaultTheme: "white"
 }
 //変数設定
 let userName = config.defaultUserName;
@@ -30,6 +31,7 @@ const wsplotocoll = config.wsplotocoll;
 const host = config.host;
 const password = config.password;
 let mostOldMessageDate = new Date();
+let theme = config.defaultTheme
 //webSocket接続
 const ws = new WebSocket(`${wsplotocoll}://${host}/api/app?password=${password}`);
 
@@ -107,7 +109,37 @@ const ChangeName = () => {
   const nameElement = document.getElementById("name");
   nameElement.innerText = "現在の表示名: " + userName;
 };
-
+const ChangeColor = () => {
+  const bodyElement = document.getElementById("body")
+  const headerElement = document.getElementById("header")
+  const ChangeNameAreaElement = document.getElementById("ChangeNameArea")
+  const EditColorAreaElement = document.getElementById("EditColorArea")
+  const explainAreaElement = document.getElementById("explainArea")
+  const ChangeThemaAreaElement = document.getElementById("ChangeThemaArea")
+  const AAAreaElement = document.getElementById("AAArea")
+  const ConnectPeopleAreaElement = document.getElementById("ConnectPeopleArea")
+  if(theme == "white") {
+    bodyElement.className = "flex h-screen w-full bg-gray-950"
+    headerElement.className = "h-16 bg-gray-900 text-white"
+    ChangeNameAreaElement.className = "m-auto w-full bg-slate-800 rounded-lg mb-2 h-1/3 text-white"
+    EditColorAreaElement.className = "m-auto w-full bg-slate-800 rounded-lg h-1/3 mb-2 text-white"
+    explainAreaElement.className = "m-auto w-full bg-slate-800 rounded-lg h-1/6 flex text-white"
+    ChangeThemaAreaElement.className = "m-auto w-full bg-slate-800 rounded-lg h-[25%] mb-2 text-white"
+    AAAreaElement.className = "m-auto w-full bg-slate-800 rounded-lg h-1/3 mb-2 text-white"
+    ConnectPeopleAreaElement.className = "m-auto w-full bg-slate-800 rounded-lg h-[25%] text-white"
+    theme = "dark"
+  } else if(theme == "dark") {
+    bodyElement.className = "flex h-screen w-full bg-gray-400"
+    headerElement.className = "h-16 bg-gray-500 text-white"
+    ChangeNameAreaElement.className = "m-auto w-full bg-slate-200 rounded-lg mb-2 h-1/3"
+    EditColorAreaElement.className = "m-auto w-full bg-slate-200 rounded-lg h-1/3 mb-2"
+    explainAreaElement.className = "m-auto w-full bg-slate-200 rounded-lg h-1/6 flex"
+    ChangeThemaAreaElement.className = "m-auto w-full bg-slate-200 rounded-lg h-[25%] mb-2"
+    AAAreaElement.className = "m-auto w-full bg-slate-200 rounded-lg h-1/3 mb-2"
+    ConnectPeopleAreaElement.className = "m-auto w-full bg-slate-200 rounded-lg h-[25%]"
+    theme = "white"
+  }
+}
 
 //メッセージ生成用関数
 const createMessageElement = (data, isAppend) => {
