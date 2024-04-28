@@ -20,11 +20,15 @@ export const handler = {
           if (req.password !== password) {
             return;
           }
-          if(req.type === undefined || req.type === null) {
-            return
+          if (req.type === undefined || req.type === null) {
+            return;
           }
-          if(req.type == "send") {
-            if (req.message === undefined || req.user === undefined || req.textColor === undefined || req.timeColor === undefined || req.bgColor === undefined || req.nameColor === undefined) {
+          if (req.type == "send") {
+            if (
+              req.message === undefined || req.user === undefined ||
+              req.textColor === undefined || req.timeColor === undefined ||
+              req.bgColor === undefined || req.nameColor === undefined
+            ) {
               return;
             }
             const result = await messages.create({
@@ -45,7 +49,7 @@ export const handler = {
               textColor: req.textColor,
               timeColor: req.timeColor,
               bgColor: req.bgColor,
-              nameColor: req.nameColor
+              nameColor: req.nameColor,
             };
             clients.forEach((client: WebSocket) => {
               if (client.readyState === WebSocket.OPEN) {
@@ -53,17 +57,16 @@ export const handler = {
               }
             });
             //socket.send(JSON.stringify(test));
-          } else if(req.type == "people") {
+          } else if (req.type == "people") {
             socket.send(JSON.stringify({
               people: clients.length,
-              type: "people"
-            }))
+              type: "people",
+            }));
           } else {
-            return
+            return;
           }
         } catch (error) {
-          console.log(error)
-
+          console.log(error);
         }
       };
       socket.onopen = (ws) => {
@@ -71,13 +74,13 @@ export const handler = {
         socket.send("connected");
       };
       socket.onclose = (ws) => {
-        const target: any = ws.target
-        clients.forEach((item: any,index: any) => {
-          if(item.readyState === target.readyState) {
+        const target: any = ws.target;
+        clients.forEach((item: any, index: any) => {
+          if (item.readyState === target.readyState) {
             clients.splice(index);
           }
         });
-      }
+      };
       return response;
     } else {
       return new Response(

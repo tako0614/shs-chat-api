@@ -11,19 +11,16 @@
 //
 //
 
-
-
-
 //config
 const config = {
   useDefaultUserName: false,
   defaultUserName: "",
-  httpplotocoll: "http",
-  wsplotocoll: "ws",
-  host: "localhost:8000",
-  password: "takotako",
-  defaultTheme: "white"
-}
+  httpplotocoll: "https",
+  wsplotocoll: "wss",
+  host: "chat.takos.jp",
+  password: "takotakotakotako",
+  defaultTheme: "white",
+};
 //アスキーアートオブジェクト
 //JavaScriptの割合増やすためなのは内緒
 //変数設定
@@ -33,18 +30,20 @@ const wsplotocoll = config.wsplotocoll;
 const host = config.host;
 const password = config.password;
 let mostOldMessageDate = new Date();
-let theme = config.defaultTheme
+let theme = config.defaultTheme;
 //webSocket接続
-const ws = new WebSocket(`${wsplotocoll}://${host}/api/app?password=${password}`);
+const ws = new WebSocket(
+  `${wsplotocoll}://${host}/api/app?password=${password}`,
+);
 
 //読み込まれたときに実行
 const onload = async () => {
-  const nameElement = document.getElementById("name")
-  if(userName == "") {
-    nameElement.innerText = "現在の表示名: " + userName
+  const nameElement = document.getElementById("name");
+  if (userName == "") {
+    nameElement.innerText = "現在の表示名: " + userName;
   }
-  const inputnameElement = document.getElementById("inputname")
-  inputnameElement.value = userName
+  const inputnameElement = document.getElementById("inputname");
+  inputnameElement.value = userName;
   const DefaultMessageDataraw = await fetch(
     `${httpplotocoll}://${host}/api/getoldeMessage?password=${password}&when=${mostOldMessageDate}&howMany=15`,
   );
@@ -76,17 +75,17 @@ ws.onclose = () => {
   alert("接続が切れました。10秒後にリロードします");
   setTimeout(() => {
     window.location.href = "./client.html";
-  }, 10000)
+  }, 10000);
 };
 //メッセージ受信時
 ws.onmessage = (event) => {
   const data = JSON.parse(event.data);
-  if(data.type == "message") {
+  if (data.type == "message") {
     createMessageElement(data, false);
     data.timestamp = new Date(data.timestamp);
-  } else if(data.type == "people"){
-    const peopeleNumberElement = document.getElementById("peopeleNumber")
-    peopeleNumberElement.innerText = data.people + "人"
+  } else if (data.type == "people") {
+    const peopeleNumberElement = document.getElementById("peopeleNumber");
+    peopeleNumberElement.innerText = data.people + "人";
   }
 };
 
@@ -114,39 +113,51 @@ const ChangeName = () => {
   nameElement.innerText = "現在の表示名: " + userName;
 };
 const ChangeColor = () => {
-  const bodyElement = document.getElementById("body")
-  const headerElement = document.getElementById("header")
-  const ChangeNameAreaElement = document.getElementById("ChangeNameArea")
-  const EditColorAreaElement = document.getElementById("EditColorArea")
-  const explainAreaElement = document.getElementById("explainArea")
-  const ChangeThemaAreaElement = document.getElementById("ChangeThemaArea")
-  const AAAreaElement = document.getElementById("AAArea")
-  const ConnectPeopleAreaElement = document.getElementById("ConnectPeopleArea")
-  const footerElement = document.getElementById("footer")
-  if(theme == "white") {
-    bodyElement.className = "flex h-screen w-full bg-gray-950"
-    headerElement.className = "h-16 bg-gray-900 text-white"
-    ChangeNameAreaElement.className = "m-auto w-full bg-slate-800 rounded-lg mb-2 h-1/3 text-white"
-    EditColorAreaElement.className = "m-auto w-full bg-slate-800 rounded-lg h-1/3 mb-2 text-white"
-    explainAreaElement.className = "m-auto w-full bg-slate-800 rounded-lg h-1/6 flex text-white"
-    ChangeThemaAreaElement.className = "m-auto w-full bg-slate-800 rounded-lg h-[25%] mb-2 text-white"
-    AAAreaElement.className = "m-auto w-full bg-slate-800 rounded-lg h-1/3 mb-2 text-white"
-    ConnectPeopleAreaElement.className = "m-auto w-full bg-slate-800 rounded-lg h-[25%] text-white"
-    footerElement.className = "fixed bottom-0 w-full bg-gray-900 h-1/12"
-    theme = "dark"
-  } else if(theme == "dark") {
-    bodyElement.className = "flex h-screen w-full bg-gray-400"
-    headerElement.className = "h-16 bg-gray-500 text-white"
-    ChangeNameAreaElement.className = "m-auto w-full bg-slate-200 rounded-lg mb-2 h-1/3"
-    EditColorAreaElement.className = "m-auto w-full bg-slate-200 rounded-lg h-1/3 mb-2"
-    explainAreaElement.className = "m-auto w-full bg-slate-200 rounded-lg h-1/6 flex"
-    ChangeThemaAreaElement.className = "m-auto w-full bg-slate-200 rounded-lg h-[25%] mb-2"
-    AAAreaElement.className = "m-auto w-full bg-slate-200 rounded-lg h-1/3 mb-2"
-    ConnectPeopleAreaElement.className = "m-auto w-full bg-slate-200 rounded-lg h-[25%]"
-    footerElement.className = "fixed bottom-0 w-full bg-gray-500 h-1/12"
-    theme = "white"
+  const bodyElement = document.getElementById("body");
+  const headerElement = document.getElementById("header");
+  const ChangeNameAreaElement = document.getElementById("ChangeNameArea");
+  const EditColorAreaElement = document.getElementById("EditColorArea");
+  const explainAreaElement = document.getElementById("explainArea");
+  const ChangeThemaAreaElement = document.getElementById("ChangeThemaArea");
+  const AAAreaElement = document.getElementById("AAArea");
+  const ConnectPeopleAreaElement = document.getElementById("ConnectPeopleArea");
+  const footerElement = document.getElementById("footer");
+  if (theme == "white") {
+    bodyElement.className = "flex h-screen w-full bg-gray-950";
+    headerElement.className = "h-16 bg-gray-900 text-white";
+    ChangeNameAreaElement.className =
+      "m-auto w-full bg-slate-800 rounded-lg mb-2 h-1/3 text-white";
+    EditColorAreaElement.className =
+      "m-auto w-full bg-slate-800 rounded-lg h-1/3 mb-2 text-white";
+    explainAreaElement.className =
+      "m-auto w-full bg-slate-800 rounded-lg h-1/6 flex text-white";
+    ChangeThemaAreaElement.className =
+      "m-auto w-full bg-slate-800 rounded-lg h-[25%] mb-2 text-white";
+    AAAreaElement.className =
+      "m-auto w-full bg-slate-800 rounded-lg h-1/3 mb-2 text-white";
+    ConnectPeopleAreaElement.className =
+      "m-auto w-full bg-slate-800 rounded-lg h-[25%] text-white";
+    footerElement.className = "fixed bottom-0 w-full bg-gray-900 h-1/12";
+    theme = "dark";
+  } else if (theme == "dark") {
+    bodyElement.className = "flex h-screen w-full bg-gray-400";
+    headerElement.className = "h-16 bg-gray-500 text-white";
+    ChangeNameAreaElement.className =
+      "m-auto w-full bg-slate-200 rounded-lg mb-2 h-1/3";
+    EditColorAreaElement.className =
+      "m-auto w-full bg-slate-200 rounded-lg h-1/3 mb-2";
+    explainAreaElement.className =
+      "m-auto w-full bg-slate-200 rounded-lg h-1/6 flex";
+    ChangeThemaAreaElement.className =
+      "m-auto w-full bg-slate-200 rounded-lg h-[25%] mb-2";
+    AAAreaElement.className =
+      "m-auto w-full bg-slate-200 rounded-lg h-1/3 mb-2";
+    ConnectPeopleAreaElement.className =
+      "m-auto w-full bg-slate-200 rounded-lg h-[25%]";
+    footerElement.className = "fixed bottom-0 w-full bg-gray-500 h-1/12";
+    theme = "white";
   }
-}
+};
 
 //メッセージ生成用関数
 const createMessageElement = (data, isAppend) => {
@@ -157,20 +168,20 @@ const createMessageElement = (data, isAppend) => {
   const parent = document.getElementById("chat");
   const div = document.createElement("div");
   div.className = "p-2 rounded-lg flex mt-2";
-  div.style = `background-color: ${data.bgColor}`
+  div.style = `background-color: ${data.bgColor}`;
   const div2 = document.createElement("div");
   const span1 = document.createElement("div");
   span1.innerText = formatDate(new Date(reqDate));
   span1.className = "text-sm";
-  span1.style = `color: ${data.timeColor}`
+  span1.style = `color: ${data.timeColor}`;
   const span2 = document.createElement("div");
   span2.innerText = Message;
   span2.className = "text-lg";
-  span2.style = `color: ${data.textColor}`
+  span2.style = `color: ${data.textColor}`;
   const div3 = document.createElement("div");
   div3.innerText = User;
   div3.className = "text-xl ml-auto pt-2 mt-auto mb-auto";
-  div3.style = `color: ${data.nameColor}`
+  div3.style = `color: ${data.nameColor}`;
   //生成
   div2.appendChild(span1);
   div2.appendChild(span2);
@@ -181,7 +192,7 @@ const createMessageElement = (data, isAppend) => {
   } else {
     parent.prepend(div);
   }
-}
+};
 
 //ページ移動用関数
 changePage = (page) => {
@@ -194,11 +205,15 @@ ws.onopen = () => {
 //メッセージ送信用関数
 const send = () => {
   const messageElement = document.getElementById("message");
-  const textColorElement = document.getElementById("text-color")
-  const bgColorElement = document.getElementById("bg-color")
-  const nameColorElement = document.getElementById("name-color")
-  const timeColorElement = document.getElementById("time-color")
-  if (messageElement.value == "" || textColorElement.value == "" || bgColorElement.value == "" || nameColorElement == "" || timeColorElement == "") {
+  const textColorElement = document.getElementById("text-color");
+  const bgColorElement = document.getElementById("bg-color");
+  const nameColorElement = document.getElementById("name-color");
+  const timeColorElement = document.getElementById("time-color");
+  if (
+    messageElement.value == "" || textColorElement.value == "" ||
+    bgColorElement.value == "" || nameColorElement == "" ||
+    timeColorElement == ""
+  ) {
     return false;
   }
   //XSS対策
@@ -206,9 +221,9 @@ const send = () => {
     />/g,
     "&gt;",
   );
-  if(userName == "" || userName == undefined) {
-    alert("名前を設定してください")
-    return false
+  if (userName == "" || userName == undefined) {
+    alert("名前を設定してください");
+    return false;
   }
   ws.send(
     JSON.stringify({
@@ -219,17 +234,16 @@ const send = () => {
       textColor: textColorElement.value,
       timeColor: timeColorElement.value,
       bgColor: bgColorElement.value,
-      nameColor: nameColorElement.value
+      nameColor: nameColorElement.value,
     }),
   );
   messageElement.value = "";
   console.log("送信完了");
-  return
+  return;
 };
 
 //開いたときに実行
 window.addEventListener("load", onload());
-
 
 //自動更新
 window.onscroll = async () => {
@@ -273,7 +287,7 @@ window.onscroll = async () => {
 setInterval(() => {
   const test = {
     type: "people",
-    password: password
-  }
-  ws.send(JSON.stringify(test))
+    password: password,
+  };
+  ws.send(JSON.stringify(test));
 }, 3000);

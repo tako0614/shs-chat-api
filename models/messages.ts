@@ -24,7 +24,7 @@ export const messagesSchema = new mongoose.Schema({
   nameColor: {
     type: String,
     required: true,
-  }
+  },
 });
 const messages = mongoose.model("messages", messagesSchema);
 export default messages;
