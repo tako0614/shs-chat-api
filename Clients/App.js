@@ -26,9 +26,6 @@ const config = {
 }
 //アスキーアートオブジェクト
 //JavaScriptの割合増やすためなのは内緒
-const AA = {
-  
-}
 //変数設定
 let userName = config.defaultUserName;
 const httpplotocoll = config.httpplotocoll;
