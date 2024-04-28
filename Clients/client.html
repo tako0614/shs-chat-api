@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
     <head>
-        <title>WebSocket Client</title>
+        <title>掲示板クライアント</title>
         <link rel="stylesheet" href="output.css">
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
@@ -9,7 +9,7 @@
         <header class="fixed w-full">
             <nav class="h-16 bg-gray-500 text-white">
                 <div class="flex w-11/12 m-auto h-full">
-                    <div class="text-3xl w-1/5 h-full mt-2">
+                    <div class="text-3xl w-1/5 h-full mt-3">
                         <a class="m-auto" href="/">掲示板</a>
                     </div>
                     <nav class="ml-auto flex">
@@ -43,10 +43,10 @@
                                 <h3 class="text-base text-center pb-4">時間の色</h3>
                             </div>
                             <div class="w-1/2">
-                                <input type="color" name="" id="" class="block text-base text-center mb-3" >
-                                <input type="color" name="" id="" value="#ffffff" class="block text-base text-center mb-3">
-                                <input type="color" name="" id="" class="block text-base text-center mb-3">
-                                <input type="color" name="" id="" class="block text-base text-center mb-3">
+                                <input type="color" name="" id="text-color" class="block text-base text-center mb-3" value="#000">
+                                <input type="color" name="" id="bg-color" class="block text-base text-center mb-3" value="#ffffff">
+                                <input type="color" name="" id="name-color" class="block text-base text-center mb-3" value="#000">
+                                <input type="color" name="" id="time-color" class="block text-base text-center mb-3"value="#000">
                             </div>
                         </div>
                     </div>
@@ -58,16 +58,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-2/3 m-auto" id="chat">
-                    <!--
-                    <div class="bg-white p-2 rounded-lg flex">
-                        <div>
-                            <div class="text-sm">2021/01/01 12:00:00</div>
-                            <div class="text-lg">Hello, World!</div>
-                        </div>
-                        <div class="text-xl ml-auto pt-2">匿名さん</div>
+                <div class="w-2/3 m-auto h-screen">
+                    <div id="chat">
                     </div>
-                    -->
                 </div>
                 <div class="w-1/6 p-2 fixed right-0 h-screen">
                     <div class="m-auto w-full bg-slate-200 rounded-lg h-[25%] mb-2">
@@ -90,10 +83,10 @@
                 </div>
             </div>
             <div class="fixed bottom-0 w-full bg-gray-500 h-1/12">
-              <form class="flex m-auto pl-2 w-1/2" onsubmit="send();return false">
-                  <textarea type="text" class="h-12 overflow-hidden m-auto bg-gray-50 border text-lg border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" id="message" placeholder="メッセージを入力" ></textarea>
-                  <input type="submit" value="送信" class="m-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-10 py-5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-              </form>
+                <form class="flex m-auto pl-2 w-1/2" onsubmit="send();return false">
+                    <textarea type="text" class="h-12 overflow-hidden m-auto bg-gray-50 border text-lg border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" id="message" placeholder="メッセージを入力" ></textarea>
+                    <input type="submit" value="送信" class="m-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-10 py-5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                </form>
             </div>
           </div>
           <script src="./App.js"></script>

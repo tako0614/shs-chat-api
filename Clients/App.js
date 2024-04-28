@@ -18,10 +18,10 @@
 const config = {
   useDefaultUserName: false,
   defaultUserName: "",
-  httpplotocoll: "https",
-  wsplotocoll: "wss",
-  host: "chat.takos.jp",
-  password: "takotakotakotako"
+  httpplotocoll: "http",
+  wsplotocoll: "ws",
+  host: "localhost:8000",
+  password: "takotako"
 }
 //変数設定
 let userName = config.defaultUserName;
@@ -117,17 +117,21 @@ const createMessageElement = (data, isAppend) => {
   const Message = data.message;
   const parent = document.getElementById("chat");
   const div = document.createElement("div");
-  div.className = "bg-white p-2 rounded-lg flex mt-2";
+  div.className = "p-2 rounded-lg flex mt-2";
+  div.style = `background-color: ${data.bgColor}`
   const div2 = document.createElement("div");
   const span1 = document.createElement("div");
   span1.innerText = formatDate(new Date(reqDate));
   span1.className = "text-sm";
+  span1.style = `color: ${data.timeColor}`
   const span2 = document.createElement("div");
   span2.innerText = Message;
   span2.className = "text-lg";
+  span2.style = `color: ${data.textColor}`
   const div3 = document.createElement("div");
   div3.innerText = User;
   div3.className = "text-xl ml-auto pt-2 mt-auto mb-auto";
+  div3.style = `color: ${data.nameColor}`
   //生成
   div2.appendChild(span1);
   div2.appendChild(span2);
@@ -151,8 +155,12 @@ ws.onopen = () => {
 //メッセージ送信用関数
 const send = () => {
   const messageElement = document.getElementById("message");
-  if (messageElement.value === "") {
-    return;
+  const textColorElement = document.getElementById("text-color")
+  const bgColorElement = document.getElementById("bg-color")
+  const nameColorElement = document.getElementById("name-color")
+  const timeColorElement = document.getElementById("time-color")
+  if (messageElement.value == "" || textColorElement.value == "" || bgColorElement.value == "" || nameColorElement == "" || timeColorElement == "") {
+    return false;
   }
   //XSS対策
   const message = messageElement.value.replace(/</g, "&lt;").replace(
@@ -161,7 +169,7 @@ const send = () => {
   );
   if(userName == "" || userName == undefined) {
     alert("名前を設定してください")
-    return
+    return false
   }
   ws.send(
     JSON.stringify({
@@ -169,10 +177,15 @@ const send = () => {
       message: message,
       user: userName,
       password: password,
+      textColor: textColorElement.value,
+      timeColor: timeColorElement.value,
+      bgColor: bgColorElement.value,
+      nameColor: nameColorElement.value
     }),
   );
   messageElement.value = "";
   console.log("送信完了");
+  return
 };
 
 //開いたときに実行

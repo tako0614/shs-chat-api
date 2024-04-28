@@ -19,12 +19,16 @@ export const handler = {
         if (req.password !== password) {
           return;
         }
-        if (req.message === undefined || req.user === undefined) {
+        if (req.message === undefined || req.user === undefined || req.textColor === undefined || req.timeColor === undefined || req.bgColor === undefined || req.nameColor === undefined) {
           return;
         }
         const result = await messages.create({
           message: req.message,
           user: req.user,
+          textColor: req.textColor,
+          timeColor: req.timeColor,
+          bgColor: req.bgColor,
+          nameColor: req.nameColor,
           timestamp: new Date(),
         });
         //接続されているクライアント全員にメッセージを送信
@@ -32,6 +36,10 @@ export const handler = {
           message: req.message,
           user: req.user,
           timestamp: result.timestamp,
+          textColor: req.textColor,
+          timeColor: req.timeColor,
+          bgColor: req.bgColor,
+          nameColor: req.nameColor
         };
         clients.forEach((client: WebSocket) => {
           if (client.readyState === WebSocket.OPEN) {
