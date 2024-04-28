@@ -109,6 +109,7 @@ const send = () => {
   );
   if(userName == "" || userName == undefined) {
     alert("名前を設定してください")
+    return
   }
   ws.send(
     JSON.stringify({

@@ -19,12 +19,8 @@ export const handler = {
         if (req.password !== password) {
           return;
         }
-        console.log(req);
-        if (req.message === undefined, req.user === undefined) {
+        if (req.message === undefined || req.user === undefined) {
           return;
-        }
-        if(req.user === null || req.user == undefined) {
-          return
         }
         const result = await messages.create({
           message: req.message,
