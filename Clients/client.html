@@ -3,20 +3,18 @@
     <head>
         <title>WebSocket Client</title>
         <link rel="stylesheet" href="output.css">
+        <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body class="flex h-screen w-full bg-gray-400" id="body">
         <header class="fixed w-full">
             <nav class="h-16 bg-gray-500 text-white">
                 <div class="flex w-11/12 m-auto h-full">
                     <div class="text-3xl w-1/5 h-full mt-2">
-                        <a class="m-auto" href="/">簡易掲示板</a>
+                        <a class="m-auto" href="/">掲示板</a>
                     </div>
                     <nav class="ml-auto flex">
                         <ul class="flex">
                             <li class="pl-10 m-auto"><p>Copyright &copy; Shota Tomiyama 2024</p></li>
-                            <li class="pl-10 m-auto"><a id="name">現在の表示名: </a></li>
-                            <li class="pl-10 m-auto flex"><input type="text" class="rounded-xl text-black" value="" id="inputname"></li>
-                            <li class="pl-10 m-auto"><button onclick="ChangeName()" class="text-white h-10 bg-blue-700 hover:bg-blue-800 focus:ring-4 p-2.5 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">変更</button></li>
                             <li class="pl-10 m-auto"><button onclick="changePage('./explain.html')" class="text-white h-10 bg-green-700 hover:bg-green-800 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 focus:ring-4 p-2.5 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">使われている技術！！</button></li>
                         </ul>
                     </nav>
@@ -24,8 +22,43 @@
             </nav>
         </header>
         <div class="pt-16 h-screen w-full pb-16" id="test">
-            <div class="h-full w-full ">
-                <div class="m-2 w-2/3 m-auto" id="chat">
+            <div class="h-full w-full flex">
+                <div class="w-1/6 p-2 fixed left-0 h-screen">
+                    <div class="m-auto w-full bg-slate-200 rounded-lg mb-2 h-1/3">
+                        <h2 class="text-center text-lg pb-">名前を変更</h2>
+                        <p id="name" class="pb-7 text-center text-sm">現在の表示名: </p>
+                        <form class="p-2" onsubmit="ChangeName(); return false;">
+                            <input type="text" placeholder="名前を入力してください" id="inputname" class="h-12 mb-[40%] m-auto bg-gray-50 border text-lg border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" >
+                            <input type="submit" value="変更" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        </form>
+                    </div>
+                    <div class="m-auto w-full bg-slate-200 rounded-lg h-1/3 mb-2">
+                        <h2 class="text-lg pb-1 text-center">メッセージの設定</h2>
+                        <p class="text-center pb-7">送信するメッセージの色を決めれます</p>
+                        <div class="flex m-auto">
+                            <div class="w-1/2">
+                                <h3 class="text-base text-center pb-4">文字の色</h3>
+                                <h3 class="text-base text-center pb-4">背景の色</h3>
+                                <h3 class="text-base text-center pb-4">名前の色</h3>
+                                <h3 class="text-base text-center pb-4">時間の色</h3>
+                            </div>
+                            <div class="w-1/2">
+                                <input type="color" name="" id="" class="block text-base text-center mb-3" >
+                                <input type="color" name="" id="" value="#ffffff" class="block text-base text-center mb-3">
+                                <input type="color" name="" id="" class="block text-base text-center mb-3">
+                                <input type="color" name="" id="" class="block text-base text-center mb-3">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="m-auto w-full bg-slate-200 rounded-lg h-1/6 flex">
+                        <div class="m-auto">
+                            <a href="https://github.com/tako0614/shs-chat-api" class="block text-center text-blue-500">github</a>
+                            <p class="block text-center">このサイトはFHD以上の解像度を想定しています</p>
+                            <p class="block text-center">それ以下の端末を使用している場合は解像度を下げてください</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-2/3 m-auto" id="chat">
                     <!--
                     <div class="bg-white p-2 rounded-lg flex">
                         <div>
@@ -35,6 +68,25 @@
                         <div class="text-xl ml-auto pt-2">匿名さん</div>
                     </div>
                     -->
+                </div>
+                <div class="w-1/6 p-2 fixed right-0 h-screen">
+                    <div class="m-auto w-full bg-slate-200 rounded-lg h-[25%] mb-2">
+                        <h2 class="text-lg pb-1 text-center">ダークモード切り替え</h2>
+                        <div class="flex h-4/6">
+                            <button class="m-auto text-white h-10 bg-blue-700 hover:bg-blue-800 focus:ring-4 p-2.5 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                切り替え！！
+                            </button>
+                        </div>
+                    </div>
+                    <div class="m-auto w-full bg-slate-200 rounded-lg h-1/3 mb-2">
+                        <h3 class="text-lg pb-1 text-center">アスキーアートコピペゾーン</h3>
+                        <div>
+
+                        </div>
+                    </div>
+                    <div class="m-auto w-full bg-slate-200 rounded-lg h-[25%]">
+                        <h3 class="text-lg pb-1 text-center">現在接続されている人数</h3>
+                    </div>
                 </div>
             </div>
             <div class="fixed bottom-0 w-full bg-gray-500 h-1/12">

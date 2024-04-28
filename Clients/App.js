@@ -127,7 +127,7 @@ const createMessageElement = (data, isAppend) => {
   span2.className = "text-lg";
   const div3 = document.createElement("div");
   div3.innerText = User;
-  div3.className = "text-xl ml-auto pt-2";
+  div3.className = "text-xl ml-auto pt-2 mt-auto mb-auto";
   //生成
   div2.appendChild(span1);
   div2.appendChild(span2);
