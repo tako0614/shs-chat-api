@@ -188,7 +188,7 @@ const ChangeColor = (isDarkmode) => {
     ConnectPeopleAreaElement.className =
       "m-auto w-full bg-slate-200 rounded-lg h-[25%]";
     footerElement.className = "fixed bottom-0 w-full bg-gray-500 h-1/12";
-    ChangeButtonElement.className = "w-32 h-32 bg-slate-800 text-white text-lg font-semibold rounded-full hover:bg-gray-900"
+    ChangeButtonElement.className = "w-32 h-32 bg-slate-800 text-white text-lg font-semibold rounded-full hover:bg-gray-800"
     theme = "white";
     return;
   }
@@ -236,7 +236,7 @@ const ChangeColor = (isDarkmode) => {
     ConnectPeopleAreaElement.className =
       "m-auto w-full bg-slate-200 rounded-lg h-[25%]";
     footerElement.className = "fixed bottom-0 w-full bg-gray-500 h-1/12";
-    ChangeButtonElement.className = "w-32 h-32 bg-slate-800 text-white text-lg font-semibold rounded-full hover:bg-gray-900"
+    ChangeButtonElement.className = "w-32 h-32 bg-slate-800 text-white text-lg font-semibold rounded-full hover:bg-gray-800"
     theme = "white";
   }
 };
