@@ -1,7 +1,6 @@
 # shs-chat-api
 
-掲示板です
-WebScoketの練習につくってみたよ
+掲示板です WebScoketの練習につくってみたよ
 
 ### Usage
 

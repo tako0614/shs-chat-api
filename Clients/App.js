@@ -38,6 +38,13 @@ const ws = new WebSocket(
 
 //読み込まれたときに実行
 const onload = async () => {
+  const isDarkmode = getComputedStyle(document.querySelector("html")).getPropertyValue('--isDarkmode');
+  console.log(isDarkmode)
+  if(isDarkmode == "True") {
+    ChangeColor(true)
+  } else {
+    ChangeColor(false)
+  }
   const nameElement = document.getElementById("name");
   if (userName == "") {
     nameElement.innerText = "名前を入力してください";
@@ -114,7 +121,62 @@ const ChangeName = () => {
   const nameElement = document.getElementById("name");
   nameElement.innerText = "現在の表示名: " + userName;
 };
-const ChangeColor = () => {
+const ChangeColor = (isDarkmode) => {
+  if(isDarkmode === true) {
+    const bodyElement = document.getElementById("body");
+    const headerElement = document.getElementById("header");
+    const ChangeNameAreaElement = document.getElementById("ChangeNameArea");
+    const EditColorAreaElement = document.getElementById("EditColorArea");
+    const explainAreaElement = document.getElementById("explainArea");
+    const ChangeThemaAreaElement = document.getElementById("ChangeThemaArea");
+    const AAAreaElement = document.getElementById("AAArea");
+    const ConnectPeopleAreaElement = document.getElementById("ConnectPeopleArea");
+    const footerElement = document.getElementById("footer");
+    bodyElement.className = "flex h-screen w-full bg-gray-950";
+    headerElement.className = "h-16 bg-gray-900 text-white";
+    ChangeNameAreaElement.className =
+      "m-auto w-full bg-slate-800 rounded-lg mb-2 h-1/3 text-white";
+    EditColorAreaElement.className =
+      "m-auto w-full bg-slate-800 rounded-lg h-1/3 mb-2 text-white";
+    explainAreaElement.className =
+      "m-auto w-full bg-slate-800 rounded-lg h-1/6 flex text-white";
+    ChangeThemaAreaElement.className =
+      "m-auto w-full bg-slate-800 rounded-lg h-[25%] mb-2 text-white";
+    AAAreaElement.className =
+      "m-auto w-full bg-slate-800 rounded-lg h-1/3 mb-2 text-white";
+    ConnectPeopleAreaElement.className =
+      "m-auto w-full bg-slate-800 rounded-lg h-[25%] text-white";
+    footerElement.className = "fixed bottom-0 w-full bg-gray-900 h-1/12";
+    theme = "dark";
+    return
+  } else if(isDarkmode === false) {
+    const bodyElement = document.getElementById("body");
+    const headerElement = document.getElementById("header");
+    const ChangeNameAreaElement = document.getElementById("ChangeNameArea");
+    const EditColorAreaElement = document.getElementById("EditColorArea");
+    const explainAreaElement = document.getElementById("explainArea");
+    const ChangeThemaAreaElement = document.getElementById("ChangeThemaArea");
+    const AAAreaElement = document.getElementById("AAArea");
+    const ConnectPeopleAreaElement = document.getElementById("ConnectPeopleArea");
+    const footerElement = document.getElementById("footer");
+    bodyElement.className = "flex h-screen w-full bg-gray-400";
+    headerElement.className = "h-16 bg-gray-500 text-white";
+    ChangeNameAreaElement.className =
+      "m-auto w-full bg-slate-200 rounded-lg mb-2 h-1/3";
+    EditColorAreaElement.className =
+      "m-auto w-full bg-slate-200 rounded-lg h-1/3 mb-2";
+    explainAreaElement.className =
+      "m-auto w-full bg-slate-200 rounded-lg h-1/6 flex";
+    ChangeThemaAreaElement.className =
+      "m-auto w-full bg-slate-200 rounded-lg h-[25%] mb-2";
+    AAAreaElement.className =
+      "m-auto w-full bg-slate-200 rounded-lg h-1/3 mb-2";
+    ConnectPeopleAreaElement.className =
+      "m-auto w-full bg-slate-200 rounded-lg h-[25%]";
+    footerElement.className = "fixed bottom-0 w-full bg-gray-500 h-1/12";
+    theme = "white";
+    return
+  }
   const bodyElement = document.getElementById("body");
   const headerElement = document.getElementById("header");
   const ChangeNameAreaElement = document.getElementById("ChangeNameArea");

@@ -3,6 +3,8 @@
     <head>
         <title>掲示板クライアント</title>
         <link rel="stylesheet" href="output.css">
+        <link rel="stylesheet" href="style.css">
+        <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body class="flex h-screen w-full bg-gray-400" id="body">
         <header class="fixed w-full">
@@ -57,8 +59,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="w-2/3 m-auto h-screen">
-                    <div id="chat" class="pt-1">
+                <div class="w-2/3 ml-auto mr-auto">
+                    <div id="chat" class="pt-1 pb-20">
                     </div>
                 </div>
                 <div class="w-1/6 p-2 fixed right-0 h-screen">
@@ -100,6 +102,7 @@
                 </form>
             </div>
           </div>
+          <!--html読み込まれたからじゃないとバグる-->
           <script src="./App.js"></script>
     </body>
 </html>
