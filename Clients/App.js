@@ -19,7 +19,8 @@ const config = {
   wsplotocoll: "wss",
   host: "chat.takos.jp",
   password: "a3Xsx2W5MAAv86iBrZdz7LTy8F8c2j",
-  defaultTheme: "white",
+  defaultLoadMessage: 20,
+  updateMessage: 15
 };
 //アスキーアートオブジェクト
 //JavaScriptの割合増やすためなのは内緒
@@ -30,7 +31,7 @@ const wsplotocoll = config.wsplotocoll;
 const host = config.host;
 const password = config.password;
 let mostOldMessageDate = new Date();
-let theme = config.defaultTheme;
+let theme
 //webSocket接続
 const ws = new WebSocket(
   `${wsplotocoll}://${host}/api/app?password=${password}`,
@@ -38,12 +39,15 @@ const ws = new WebSocket(
 
 //読み込まれたときに実行
 const onload = async () => {
-  const isDarkmode = getComputedStyle(document.querySelector("html")).getPropertyValue('--isDarkmode');
-  console.log(isDarkmode)
-  if(isDarkmode == "True") {
-    ChangeColor(true)
+  const isDarkmode = getComputedStyle(document.querySelector("html"))
+    .getPropertyValue("--isDarkmode");
+  console.log(isDarkmode);
+  if (isDarkmode == "True") {
+    theme = "white"
+    ChangeColor(true);
   } else {
-    ChangeColor(false)
+    theme = "dark"
+    ChangeColor(false);
   }
   const nameElement = document.getElementById("name");
   if (userName == "") {
@@ -54,7 +58,7 @@ const onload = async () => {
   const inputnameElement = document.getElementById("inputname");
   inputnameElement.value = userName;
   const DefaultMessageDataraw = await fetch(
-    `${httpplotocoll}://${host}/api/getoldeMessage?password=${password}&when=${mostOldMessageDate}&howMany=15`,
+    `${httpplotocoll}://${host}/api/getoldeMessage?password=${password}&when=${mostOldMessageDate}&howMany=${config.defaultLoadMessage}`,
   );
   let DefaultMessageData = await DefaultMessageDataraw.json();
   if (typeof DefaultMessageData === "string") {
@@ -121,8 +125,11 @@ const ChangeName = () => {
   const nameElement = document.getElementById("name");
   nameElement.innerText = "現在の表示名: " + userName;
 };
+
+
+//色変更コーナー
 const ChangeColor = (isDarkmode) => {
-  if(isDarkmode === true) {
+  if (isDarkmode === true) {
     const bodyElement = document.getElementById("body");
     const headerElement = document.getElementById("header");
     const ChangeNameAreaElement = document.getElementById("ChangeNameArea");
@@ -130,8 +137,11 @@ const ChangeColor = (isDarkmode) => {
     const explainAreaElement = document.getElementById("explainArea");
     const ChangeThemaAreaElement = document.getElementById("ChangeThemaArea");
     const AAAreaElement = document.getElementById("AAArea");
-    const ConnectPeopleAreaElement = document.getElementById("ConnectPeopleArea");
+    const ConnectPeopleAreaElement = document.getElementById(
+      "ConnectPeopleArea",
+    );
     const footerElement = document.getElementById("footer");
+    const ChangeButtonElement = document.getElementById("ChangeButton")
     bodyElement.className = "flex h-screen w-full bg-gray-950";
     headerElement.className = "h-16 bg-gray-900 text-white";
     ChangeNameAreaElement.className =
@@ -147,9 +157,10 @@ const ChangeColor = (isDarkmode) => {
     ConnectPeopleAreaElement.className =
       "m-auto w-full bg-slate-800 rounded-lg h-[25%] text-white";
     footerElement.className = "fixed bottom-0 w-full bg-gray-900 h-1/12";
+    ChangeButtonElement.className = "w-32 h-32 bg-white text-black text-lg font-semibold rounded-full hover:bg-gray-300"
     theme = "dark";
-    return
-  } else if(isDarkmode === false) {
+    return;
+  } else if (isDarkmode === false) {
     const bodyElement = document.getElementById("body");
     const headerElement = document.getElementById("header");
     const ChangeNameAreaElement = document.getElementById("ChangeNameArea");
@@ -157,8 +168,11 @@ const ChangeColor = (isDarkmode) => {
     const explainAreaElement = document.getElementById("explainArea");
     const ChangeThemaAreaElement = document.getElementById("ChangeThemaArea");
     const AAAreaElement = document.getElementById("AAArea");
-    const ConnectPeopleAreaElement = document.getElementById("ConnectPeopleArea");
+    const ConnectPeopleAreaElement = document.getElementById(
+      "ConnectPeopleArea",
+    );
     const footerElement = document.getElementById("footer");
+    const ChangeButtonElement = document.getElementById("ChangeButton")
     bodyElement.className = "flex h-screen w-full bg-gray-400";
     headerElement.className = "h-16 bg-gray-500 text-white";
     ChangeNameAreaElement.className =
@@ -174,8 +188,9 @@ const ChangeColor = (isDarkmode) => {
     ConnectPeopleAreaElement.className =
       "m-auto w-full bg-slate-200 rounded-lg h-[25%]";
     footerElement.className = "fixed bottom-0 w-full bg-gray-500 h-1/12";
+    ChangeButtonElement.className = "w-32 h-32 bg-slate-800 text-white text-lg font-semibold rounded-full hover:bg-gray-900"
     theme = "white";
-    return
+    return;
   }
   const bodyElement = document.getElementById("body");
   const headerElement = document.getElementById("header");
@@ -186,6 +201,7 @@ const ChangeColor = (isDarkmode) => {
   const AAAreaElement = document.getElementById("AAArea");
   const ConnectPeopleAreaElement = document.getElementById("ConnectPeopleArea");
   const footerElement = document.getElementById("footer");
+  const ChangeButtonElement = document.getElementById("ChangeButton")
   if (theme == "white") {
     bodyElement.className = "flex h-screen w-full bg-gray-950";
     headerElement.className = "h-16 bg-gray-900 text-white";
@@ -202,6 +218,7 @@ const ChangeColor = (isDarkmode) => {
     ConnectPeopleAreaElement.className =
       "m-auto w-full bg-slate-800 rounded-lg h-[25%] text-white";
     footerElement.className = "fixed bottom-0 w-full bg-gray-900 h-1/12";
+    ChangeButtonElement.className = "w-32 h-32 bg-white text-black text-lg font-semibold rounded-full hover:bg-gray-300"
     theme = "dark";
   } else if (theme == "dark") {
     bodyElement.className = "flex h-screen w-full bg-gray-400";
@@ -219,6 +236,7 @@ const ChangeColor = (isDarkmode) => {
     ConnectPeopleAreaElement.className =
       "m-auto w-full bg-slate-200 rounded-lg h-[25%]";
     footerElement.className = "fixed bottom-0 w-full bg-gray-500 h-1/12";
+    ChangeButtonElement.className = "w-32 h-32 bg-slate-800 text-white text-lg font-semibold rounded-full hover:bg-gray-900"
     theme = "white";
   }
 };
@@ -266,6 +284,9 @@ changePage = (page) => {
 ws.onopen = () => {
   console.log("接続完了");
 };
+ws.onerror = () => {
+  alert("WebSocket Error")
+}
 //メッセージ送信用関数
 const send = () => {
   const messageElement = document.getElementById("message");
@@ -321,9 +342,9 @@ window.onscroll = async () => {
   const scrolled = window.scrollY;
 
   // スクロールされた量とビューポートの高さの合計が、全体のページの高さと同じかどうかをチェック
-  if (windowHeight + scrolled >= documentHeight) {
+  if (windowHeight + scrolled >= documentHeight - 10) {
     const result = await fetch(
-      `${httpplotocoll}://${host}/api/getoldeMessage?password=${password}&when=${mostOldMessageDate}&howMany=15`,
+      `${httpplotocoll}://${host}/api/getoldeMessage?password=${password}&when=${mostOldMessageDate}&howMany=${config.updateMessage}`,
     );
     let data = await result.json();
     data = JSON.parse(data);
@@ -354,4 +375,4 @@ setInterval(() => {
     password: password,
   };
   ws.send(JSON.stringify(test));
-}, 3000);
+}, 1000);
