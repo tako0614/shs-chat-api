@@ -18,7 +18,7 @@ const config = {
   httpplotocoll: "https",
   wsplotocoll: "wss",
   host: "chat.takos.jp",
-  password: "takotakotakotako",
+  password: "a3Xsx2W5MAAv86iBrZdz7LTy8F8c2j",
   defaultTheme: "white",
 };
 //アスキーアートオブジェクト
@@ -40,6 +40,8 @@ const ws = new WebSocket(
 const onload = async () => {
   const nameElement = document.getElementById("name");
   if (userName == "") {
+    nameElement.innerText = "名前を入力してください";
+  } else {
     nameElement.innerText = "現在の表示名: " + userName;
   }
   const inputnameElement = document.getElementById("inputname");
