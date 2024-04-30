@@ -74,11 +74,11 @@ export const handler = {
         }
       };
       socket.onopen = (ws) => {
-        clients.push(ws.target);
+        clients.push(ws);
         socket.send("connected");
       };
       socket.onclose = (ws) => {
-        const target: any = ws.target;
+        const target: any = ws;
         console.log(clients)
         clients.forEach((item: any, index: any) => {
           if (WebSocket.OPEN === target.readyState) {
