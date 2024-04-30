@@ -79,7 +79,6 @@ export const handler = {
       };
       socket.onclose = (ws) => {
         const target: any = ws.target;
-        console.log(clients.readyState)
         clients.forEach((item: any, index: any) => {
           if (WebSocket.OPEN === item.readyState) {
             return
