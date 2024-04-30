@@ -31,6 +31,10 @@ export const handler = {
             ) {
               return;
             }
+            const message = req.message
+            if(message.length < 200) {
+              return
+            }
             const result = await messages.create({
               message: req.message,
               user: req.user,
