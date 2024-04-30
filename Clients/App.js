@@ -310,7 +310,7 @@ const send = () => {
     alert("名前を設定してください");
     return false;
   }
-  if(message.length < 200) {
+  if(message.length > 200) {
     alert(`文字数が${message.length - 200}文字オーバーしています`)
     return;
   }

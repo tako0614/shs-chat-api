@@ -32,7 +32,7 @@ export const handler = {
               return;
             }
             const message = req.message
-            if(message.length < 200) {
+            if(message.length > 200) {
               return
             }
             const result = await messages.create({
