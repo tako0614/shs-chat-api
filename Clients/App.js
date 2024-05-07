@@ -17,8 +17,8 @@ const config = {
   defaultUserName: "匿名",
   httpplotocoll: "https",
   wsplotocoll: "wss",
-  host: "chat.takos.jp",
-  password: "a3Xsx2W5MAAv86iBrZdz7LTy8F8c2j",
+  host: "chat2.takos.jp",
+  password: "A7R3bNn9wECYMKQXj6DpVWTmJqRA8i",
   defaultLoadMessage: 20,
   updateMessage: 15
 };
@@ -254,15 +254,15 @@ const createMessageElement = (data, isAppend) => {
   const div2 = document.createElement("div");
   const span1 = document.createElement("div");
   span1.innerText = formatDate(new Date(reqDate));
-  span1.className = "text-sm";
+  span1.className = "text-xl lg:text-sm";
   span1.style = `color: ${data.timeColor}`;
   const span2 = document.createElement("div");
   span2.innerText = Message;
-  span2.className = "text-lg";
+  span2.className = "text-5xl lg:text-lg";
   span2.style = `color: ${data.textColor}`;
   const div3 = document.createElement("div");
   div3.innerText = User;
-  div3.className = "text-xl ml-auto pt-2 mt-auto mb-auto";
+  div3.className = "text-3xl lg:text-xl ml-auto pt-2 mt-auto mb-auto";
   div3.style = `color: ${data.nameColor}`;
   //生成
   div2.appendChild(span1);
