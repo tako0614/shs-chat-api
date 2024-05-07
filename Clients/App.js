@@ -18,7 +18,7 @@ const config = {
   httpplotocoll: "https",
   wsplotocoll: "wss",
   host: "chat.takos.jp",
-  password: "a3Xsx2W5MAAv86iBrZdz7LTy8F8c2j",
+  password: "tako",
   defaultLoadMessage: 20,
   updateMessage: 15
 };
