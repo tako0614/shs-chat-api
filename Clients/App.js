@@ -17,7 +17,7 @@ const config = {
   defaultUserName: "匿名",
   httpplotocoll: "https",
   wsplotocoll: "wss",
-  host: "chat.takos.jp",
+  host: "chat3.takos.jp",
   password: "tako",
   defaultLoadMessage: 20,
   updateMessage: 15
