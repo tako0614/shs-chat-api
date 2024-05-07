@@ -380,3 +380,8 @@ setInterval(() => {
   };
   ws.send(JSON.stringify(test));
 }, 1000);
+setInterval(() => {
+  if(ws.readyState !== WebSocket.OPEN) {
+    window.location.href = "./client.html";
+  }
+}, 1000);
