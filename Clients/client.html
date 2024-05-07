@@ -4,7 +4,6 @@
         <title>掲示板クライアント</title>
         <link rel="stylesheet" href="output.css">
         <link rel="stylesheet" href="style.css">
-        <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body class="flex h-screen w-full bg-gray-400" id="body">
         <header class="fixed w-full">
@@ -101,7 +100,7 @@
             <div class="fixed bottom-0 w-full bg-gray-500 lg:h-1/12 lg:h-10" id="footer">
                 <form class="flex m-auto pl-2 w-full lg:w-1/2 p-3 lg:p-0" onsubmit="send();return false">
                     <textarea type="text" class="lg:h-12 overflow-hidden m-auto bg-gray-50 border lg:text-lg text-4xl border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" id="message" placeholder="メッセージを入力" ></textarea>
-                    <input type="submit" value="送信" class="m-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-10 py-4 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <input type="submit" value="送信" class="m-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg lg:text-sm text-3xl sm:w-auto px-10 py-4 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 </form>
             </div>
           </div>
