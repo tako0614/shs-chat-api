@@ -5,18 +5,15 @@
 /// <reference lib="deno.ns" />
 
 import "$std/dotenv/load.ts";
-
 import { start } from "$fresh/server.ts";
 import manifest from "./fresh.gen.ts";
 import config from "./fresh.config.ts";
-import mongoose from "mongoose";
-import { load } from "https://deno.land/std@0.204.0/dotenv/mod.ts";
-/**connect mongoDB */
-const env = await load();
-const url = env["MONGO_URL"];
-await mongoose.connect(url).then(() => {
-  console.log("mongo DB 接続");
-}).catch((err) => {
-  console.log(err);
-});
+import { loadConfig } from "./config/index.ts";
+import { connectDatabase } from "./lib/database.ts";
+
+// 設定読み込み・DB接続
+const appConfig = await loadConfig();
+await connectDatabase(appConfig.mongoUrl);
+
+// サーバー起動
 await start(manifest, config);
